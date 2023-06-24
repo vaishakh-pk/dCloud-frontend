@@ -4,7 +4,7 @@ import "./style.css"
 const Page = () => {
     return (
         <div>
-            upload
+            new ypladflkjasdhf
         </div>
     );
 };
