@@ -1,6 +1,5 @@
 import React from 'react';
 import LeftSide from '../components/left-component';
-import plusIcon from './images/plus.png';
 import './mycloud.css';
 
 
@@ -27,7 +26,7 @@ function CloudLayout() {
             <button className="filesbutton">Personal</button>
             <button className="filesbutton">Archive</button>
             <button className="plusbutton">
-              <img src={plusIcon} alt="Button Image" />
+              <img src="/plus.png" alt="Button Image" />
             </button>
           </div>
           <div className="recentfiles">

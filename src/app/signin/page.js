@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import '../styles/sign.css';
 export default function Signin() {
     return (
         <div className="login-container">

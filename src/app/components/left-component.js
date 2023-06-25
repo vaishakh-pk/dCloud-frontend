@@ -1,12 +1,11 @@
 import React from 'react';
-import avatar from './images/avatar.png';
 import './styles/left-component.css';
 
 function LeftSide() {
     return (
         <div className="left-side">
             <div className="profile-photo">
-                <img src={avatar} alt="Profile Photo" />
+                <img src="/avatar.png" alt="Profile Photo" />
             </div>
             <div>
                 <button className="button1">My Cloud</button>
