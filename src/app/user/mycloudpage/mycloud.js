@@ -1,10 +1,9 @@
-
+import './mycloudpage.css'
 function mycloudpage() {
     return(
 <>
 <Head>
 <title>D Cloud Layout</title>
-<link rel="stylesheet" href="mycloudpage.css"/>
 </Head>
   
   <div className="container">
