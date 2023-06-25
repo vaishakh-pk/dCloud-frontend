@@ -3,17 +3,12 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
   }
-  
+
   .container {
     display: flex;
     min-height: 100vh;
   }
-  
-  .left-side {
-    
-    flex: 0 0 200px;
-    background-color: #1d297c;
-  }
+
   
   .main-content {
     flex-grow: 1;
@@ -27,10 +22,7 @@ body {
     padding: 70px;
   }
   
-  .profile-photo {
-    text-align: center;
-    padding: 40px;
-  }
+
   .profile-photo img {
     width: 50px;
     height: 50px;
@@ -38,35 +30,6 @@ body {
     border-color: #333;
     border-style: solid;
     object-fit: cover;
-  }
-  .button1 {
-    font-size: 15px;
-    width: 100%;
-    border: none;  /*Remove the border if desired */
-    background-color: #1d297c; /* Set the desired background color */
-    color: #ffffff; /* Set the desired text color */
-    padding: 15px 15px; /* Adjust the padding as needed */
-  }
-  .button1:hover {
-    background-color: #141d58; /* Set the background color on hover */
-    color: #ffffff; /* Set the text color on hover */
-  }
-  .leftbuttonbottom {
-    padding-top: 150%;
-  }
-  
-  .button2 {
-    font-size: 15px;
-    width: 100%;
-    border: none;  /*Remove the border if desired */
-    background-color: #1d297c; /* Set the desired background color */
-    color: #ffffff; /* Set the desired text color */
-    padding: 15px 15px; /* Adjust the padding as needed */
-  }
-  
-  .button2:hover {
-    background-color: #141d58; /* Set the background color on hover */
-    color: #ffffff; /* Set the text color on hover */
   }
   
   .search-bar {
