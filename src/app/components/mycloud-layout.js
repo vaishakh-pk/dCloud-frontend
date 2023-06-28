@@ -1,6 +1,6 @@
 import React from 'react';
-import LeftSide from '../components/left-component';
-import './mycloud.css';
+import LeftSide from './left-component';
+import './styles/mycloud.css';
 
 
 function CloudLayout() {

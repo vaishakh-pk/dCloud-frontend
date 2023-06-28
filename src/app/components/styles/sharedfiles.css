@@ -1,0 +1,244 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .left-side {
+    
+    flex: 0 0 200px;
+    background-color: #1d297c;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #e8eef3;
+  }
+
+  
+  .profile-photo {
+    text-align: center;
+    padding: 40px;
+  }
+  .profile-photo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d1dbff;
+    border:none;
+    object-fit: cover;
+  }
+  .button1 {
+    font-size: 15px;
+    width: 100%;
+    border: none;  /*Remove the border if desired */
+    background-color: #1d297c; /* Set the desired background color */
+    color: #ffffff; /* Set the desired text color */
+    padding: 15px 15px; /* Adjust the padding as needed */
+  }
+  .button1:hover {
+    background-color: #141d58; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+  }
+  .leftbuttonbottom {
+    padding-top: 150%;
+  }
+  
+  .button2 {
+    font-size: 15px;
+    width: 100%;
+    border: none;  /*Remove the border if desired */
+    background-color: #1d297c; /* Set the desired background color */
+    color: #ffffff; /* Set the desired text color */
+    padding: 15px 15px; /* Adjust the padding as needed */
+  }
+  
+  .button2:hover {
+    background-color: #141d58; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Adjust the width as needed */
+    height: 6%; /* Adjust the height as needed */
+    background-color: rgb(254, 254, 255); /* Set the background color */
+    border-radius: 20px; /* Add rounded corners if desired */
+    overflow: hidden; /* Hide any overflowing content */
+  }
+  
+  .search-input {
+    background-color: rgb(254, 254, 255);
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 25px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    border-radius: 20px;
+  }
+  
+  .search-button {
+    background-color: #202e89; /* Set the button background color */
+    color: #ffffff; /* Set the button text color */
+    border: none;
+    outline: none;
+    padding: 20px 15px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    cursor: pointer;
+    border-radius: 100%;
+  }
+  .search-button:hover {
+    background-color: #141d58; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+  }
+  .sharedfiles {
+    color: #2a3471;  
+    padding: 10px;
+    padding-top: 20px;
+  }
+  .sharedfilesfont {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .filesbutton {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #2a3471;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+  }
+  .filesbutton:hover {
+    background-color: #c7c3cf;
+    color: #141d58;
+  }  
+  
+  .plusbutton {
+    background-color: #ffffff;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+  }
+  .plusbutton img {
+    padding-top: 15px;
+    border-radius: 10px;
+    vertical-align: middle;
+    background-color: #ffffff;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    
+  }
+  .sharelistphoto {
+    text-align: center;
+  }
+  .sharelistphoto img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #d1dbff;
+    border:none;
+  }
+  .numberoffile {
+    font-size:15px;
+    font-weight: lighter;
+  }
+  .numberoffilehid {
+    font-size:15px;
+    font-weight: lighter;
+    color: #ffffff;
+  }
+
+
+  .recentfiles {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .recentflcapt {
+    font-size: 25px;
+    font-weight: bold;
+    color: #2a3471;
+  }
+   
+  .longbuttoncontainer {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    background-color: #ffffff;
+    color: #2a3471;
+    text-align: left;
+    font-weight: bold;
+    font-size: 16px;
+    width: 1100px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    
+  }
+  .longbutton1 {
+    width: 900px;
+    height: 60px;
+    padding-right: 100px;
+    border: none;
+    background-color: #ffffff;
+    border-radius: 10px;
+    justify-content:space-evenly;
+  }
+  .longbutton-elements {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;    
+  }
+
+  .longbutton-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0473c2;
+  }
+  .longbutton-icon img {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+  }
+  .longbutton-share,
+  .longbutton-options 
+  {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: none; 
+  }
+  .longbutton-share img,
+  .longbutton-options img
+   { 
+    width: 25px;
+    height: 25px;
+    padding: 5px,5px;
+  }
+  .longbutton-filename {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d297c;
+  }
+  .longbutton-fileformat {
+    font-size: 15px;
+    font-weight: lighter;
+    color: #1d297c
+  }
+  .share-option-button-adjust {
+    padding-left: 50px;
+  }
