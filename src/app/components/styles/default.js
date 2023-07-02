@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import LeftSide from '../components/left-component';
-import MyCloudLayout from '../components/mycloud-layout';
-import SharedFilesLayout from '../components/sharedFiles-layout';
+import LeftSide from '../left-component';
+import MyCloudLayout from '../mycloud-layout';
+import SharedFilesLayout from '../sharedFiles-layout';
 
 const Home = () => {
     const [currentComponent, setCurrentComponent] = useState('My Cloud');
