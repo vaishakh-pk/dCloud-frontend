@@ -9,13 +9,9 @@ body {
     min-height: 100vh;
   }
   
-  .left-side {
-    
-    flex: 0 0 200px;
-    background-color: #1d297c;
-  }
-  
+
   .main-content {
+    margin-left: 200px;
     flex-grow: 1;
     padding: 20px;
     background-color: #e8eef3;
@@ -46,10 +42,7 @@ body {
     background-color: #141d58; /* Set the background color on hover */
     color: #ffffff; /* Set the text color on hover */
   }
-  .leftbuttonbottom {
-    padding-top: 150%;
-  }
-  
+
   .button2 {
     font-size: 15px;
     width: 100%;
@@ -112,10 +105,11 @@ body {
     font-weight: bold;
     background-color: #ffffff;
     color: #2a3471;
-    width: 18%;
+    width: 15%;
     height: 100px;
     border-radius: 10px;
     border: none;
+    margin: 5px;
   }
   .filesbutton:hover {
     background-color: #c7c3cf;
@@ -124,10 +118,11 @@ body {
   
   .plusbutton {
     background-color: #ffffff;
-    width: 18%;
+    width: 15%;
     height: 100px;
     border-radius: 10px;
     border: none;
+    margin: 5px;
   }
   .plusbutton img {
     padding-top: 15px;

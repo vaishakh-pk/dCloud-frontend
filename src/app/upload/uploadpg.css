@@ -10,14 +10,6 @@ body {
   background-color: #e8eef3;
 }
 
-.left-side {
-  position: fixed;
-  width:200px;
-  height: 800px;
-  background-color: #1d297c;
-  z-index: 1;
-  overflow: hidden;
-}
 
 .main-content {
   margin-left: 200px;
@@ -55,9 +47,6 @@ body {
   color: #ffffff;
 }
 
-.leftbuttonbottom {
-  padding-top: 150%;
-}
 
 .upload-files-box{
   background-color: #ffffff;

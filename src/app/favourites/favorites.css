@@ -9,16 +9,7 @@ body {
     min-height: 100vh;
     
   }
-  
-  .left-side {
-    position: fixed;
-    width:200px;
-    height: 800px;
-    background-color: #1d297c;
-    z-index: 1;
-    overflow: hidden;
-  }
-  
+
   .main-content {
     margin-left: 200px;
     flex-grow: 1;
@@ -52,10 +43,7 @@ body {
     background-color: #141d58; /* Set the background color on hover */
     color: #ffffff; /* Set the text color on hover */
   }
-  .leftbuttonbottom {
-    padding-top: 150%;
-  }
-  
+
   .button2 {
     font-size: 15px;
     width: 100%;

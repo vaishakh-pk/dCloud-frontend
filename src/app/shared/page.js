@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftSide from '../components/left-component';
-import '../components/styles/sharedfiles.css';
+import './sharedfiles.css';
 const SharedFilesLayout = () => {
     return (
         <div className="container">
@@ -8,8 +8,7 @@ const SharedFilesLayout = () => {
             <div className="main-content">
                 {/* Main content in the middle */}
                 <div className="search-bar">
-                    <input type="text" className="search-input" placeholder="Type here..." />
-                    <button className="search-button">Search</button>
+                    <input type="text" className="search-input" placeholder="Search" />
                 </div>
 
                 <div className="sharedfiles">

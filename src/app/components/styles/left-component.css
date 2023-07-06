@@ -1,8 +1,13 @@
 
-.left-side {
 
-    flex: 0 0 200px;
+.left-side {
+    position: fixed;
+    width:200px;
+    height: 800px;
     background-color: #1d297c;
+    z-index: 1;
+    overflow: hidden;
+    flex:200px 0 0;
 }
 
 .profile-photo {
@@ -30,7 +35,7 @@
     color: #ffffff; /* Set the text color on hover */
 }
 .leftbuttonbottom {
-    padding-top: 150%;
+    padding-top: 130%;
 }
 
 .button2 {
