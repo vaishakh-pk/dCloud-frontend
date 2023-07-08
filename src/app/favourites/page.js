@@ -39,7 +39,6 @@ function FavoritesLayout() {
                     <button className="files-buttons"><img src="picture.png" alt="Profile Photo" /><p className="filename">file_0001</p></button>
                     <button className="files-buttons"><img src="picture.png" alt="Profile Photo" /><p className="filename">file_0001</p></button>
                     <button className="files-buttons"><img src="picture.png" alt="Profile Photo" /><p className="filename">file_0001</p></button>
-                    <button className="files-buttons"><img src="picture.png" alt="Profile Photo" /><p className="filename">file_0001</p></button>
                 </div>
             </div>
         </div>
