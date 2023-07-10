@@ -1,5 +1,5 @@
 import React from 'react';
-import './uploadpg.css'; // Import the CSS file
+import './upload.css'; // Import the CSS file
 import LeftSide from '../components/left-component';
 function UploadPageLayout() {
     return (
