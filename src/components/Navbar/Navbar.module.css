@@ -29,6 +29,7 @@
     background-color: #1d297c; /* Set the desired background color */
     color: #ffffff; /* Set the desired text color */
     padding: 15px 15px; /* Adjust the padding as needed */
+    cursor: pointer;
 }
 .button1:hover {
     background-color: #141d58; /* Set the background color on hover */
