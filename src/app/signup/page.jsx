@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import "./signup.css"
+import Link from "next/link";
 export default function Signup() {
     return (
         <div className="login-container">
@@ -27,9 +28,7 @@ export default function Signup() {
                         <label htmlFor="password" className="label">Password</label>
 
                     </div>
-                    <input id="password" name="password" type="password" placeholder="Enter new password" autoComplete="current-password" required
-                           className="input"/>
-                    <input id="password" name="password" type="password" placeholder="Re-Enter password" autoComplete="current-password" required
+                    <input id="password" name="password" type="password" autoComplete="current-password" required
                            className="input"/>
                 </div>
                 <div className="form-group">
@@ -37,7 +36,7 @@ export default function Signup() {
                 </div>
             </form>
 
-            <p className="already-a-member">Already a member? <a href="/signin" className="signin-link">Sign In</a></p>
+            <p className="already-a-member">Already a member? <Link href="/login" className="signin-link">Sign In</Link></p>
         </div>
     )
 }

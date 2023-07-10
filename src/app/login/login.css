@@ -1,11 +1,9 @@
-body {
+.login-container {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 6px;
-    font-family:sans-serif;
+    justify-content: center;
+    margin-top: 6vmax;
 }
 
 form {
