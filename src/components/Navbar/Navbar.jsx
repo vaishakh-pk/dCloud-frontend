@@ -2,9 +2,9 @@
 import React from 'react';
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import './styles/left-component.css';
+import './Navbar.css';
 
-function LeftSide() {
+function Navbar() {
     const router = useRouter();
     return (
         <div className="left-side">
@@ -25,4 +25,4 @@ function LeftSide() {
     );
 }
 
-export default LeftSide;
+export default Navbar;

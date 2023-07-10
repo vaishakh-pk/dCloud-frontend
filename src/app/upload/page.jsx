@@ -1,10 +1,10 @@
 import React from 'react';
-import './upload.css'; // Import the CSS file
-import LeftSide from '../components/left-component';
+import './upload.css';
+
+
 function UploadPageLayout() {
     return (
         <div className="container">
-            <LeftSide />
             <div className="main-content">
                 <div className="upload-files-box">
                     <h2 className="uploadfiles">Upload Files</h2>

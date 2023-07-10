@@ -1,10 +1,9 @@
 import React from 'react';
 import './favorites.css';
-import LeftSide from '../components/left-component';
+import LeftSide from '../../components/Navbar/Navbar';
 function FavoritesLayout() {
     return (
         <div className="container">
-            <LeftSide />
             <div className="main-content">
                 {/* Main content in the middle */}
                 <div className="search-bar">

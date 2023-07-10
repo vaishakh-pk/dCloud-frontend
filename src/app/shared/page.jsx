@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftSide from '../components/left-component';
+import LeftSide from '../../components/Navbar/Navbar';
 import './sharedfiles.css';
 const SharedFilesLayout = () => {
     return (

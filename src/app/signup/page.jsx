@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import '../styles/sign.css';
+import "./signup.css"
 export default function Signup() {
     return (
         <div className="login-container">

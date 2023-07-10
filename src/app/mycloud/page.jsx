@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftSide from '../components/left-component';
+import LeftSide from '../../components/Navbar/Navbar';
 import './mycloud.css';
 
 
@@ -7,7 +7,7 @@ import './mycloud.css';
 const HomePageLayout = () => {
     return (
             <div className="container">
-                <LeftSide/>
+
 
                 <div className="main-content">
                     {/* Main content in the middle */}
