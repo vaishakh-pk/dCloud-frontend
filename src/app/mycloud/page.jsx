@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import LeftSide from '../../components/Navbar/Navbar';
 import './mycloud.css';
+import Navbar from "../../components/Navbar/Navbar";
 
 
 
 const HomePageLayout = () => {
     return (
+        <Fragment >
+            <Navbar />
             <div className="container">
-
-
                 <div className="main-content">
                     {/* Main content in the middle */}
                     <div className="search-bar">
@@ -188,6 +189,7 @@ const HomePageLayout = () => {
                     </div>
                 </div>
             </div>
+        </Fragment>
         );
 }
 
