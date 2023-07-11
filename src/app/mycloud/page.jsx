@@ -78,83 +78,57 @@ const HomePageLayout = () => {
                             </div>
                         </button>
                     </div>
-                    <div className={styles.filedivision}>
-                        <p>Files</p>
-                        <button className={styles.filesbutton}>
-                            <img src="mycloud/work.png" alt="Button Image"/>
-                            <div className={styles['filedivision-text']}>
-                                <p className={styles['filedivision-text-name']}>Work</p>
-                                <p className={styles['filedivision-text-number']}>100 files</p>
-                            </div>
-                        </button>
-                        <button className={styles.filesbutton}>
-                            <img src="mycloud/person.png" alt="Button Image"/>
-                            <div className={styles['filedivision-text']}>
-                                <p className={styles['filedivision-text-name']}>Personal</p>
-                                <p className={styles['filedivision-text-number']}>540 files</p>
-                            </div>
-                        </button>
-                        <button className={styles.filesbutton}>
-                            <img src="mycloud/school.png" alt="Button Image"/>
-                            <div className={styles['filedivision-text']}>
-                                <p className={styles['filedivision-text-name']}>School</p>
-                                <p className={styles['filedivision-text-number']}>92 files</p>
-                            </div>
-                        </button>
-                        <button className={styles.filesbutton}>
-                            <img src="mycloud/archive.png" alt="Button Image"/>
-                            <div className={styles['filedivision-text']}>
-                                <p className={styles['filedivision-text-name']}>Archive</p>
-                                <p className={styles['filedivision-text-number']}>113 files</p>
-                            </div>
-                        </button>
-                    </div>
+                    {/*<div className={styles.filedivision}>*/}
+                    {/*    <p>Files</p>*/}
+                    {/*    <button className={styles.filesbutton}>*/}
+                    {/*        <img src="mycloud/work.png" alt="Button Image"/>*/}
+                    {/*        <div className={styles['filedivision-text']}>*/}
+                    {/*            <p className={styles['filedivision-text-name']}>Work</p>*/}
+                    {/*            <p className={styles['filedivision-text-number']}>100 files</p>*/}
+                    {/*        </div>*/}
+                    {/*    </button>*/}
+                    {/*    <button className={styles.filesbutton}>*/}
+                    {/*        <img src="mycloud/person.png" alt="Button Image"/>*/}
+                    {/*        <div className={styles['filedivision-text']}>*/}
+                    {/*            <p className={styles['filedivision-text-name']}>Personal</p>*/}
+                    {/*            <p className={styles['filedivision-text-number']}>540 files</p>*/}
+                    {/*        </div>*/}
+                    {/*    </button>*/}
+                    {/*    <button className={styles.filesbutton}>*/}
+                    {/*        <img src="mycloud/school.png" alt="Button Image"/>*/}
+                    {/*        <div className={styles['filedivision-text']}>*/}
+                    {/*            <p className={styles['filedivision-text-name']}>School</p>*/}
+                    {/*            <p className={styles['filedivision-text-number']}>92 files</p>*/}
+                    {/*        </div>*/}
+                    {/*    </button>*/}
+                    {/*    <button className={styles.filesbutton}>*/}
+                    {/*        <img src="mycloud/archive.png" alt="Button Image"/>*/}
+                    {/*        <div className={styles['filedivision-text']}>*/}
+                    {/*            <p className={styles['filedivision-text-name']}>Archive</p>*/}
+                    {/*            <p className={styles['filedivision-text-number']}>113 files</p>*/}
+                    {/*        </div>*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                     <div className={styles.recentfiles}>
                         <p className={styles.recentflcapt}>Recent files</p>
-                        <div>
-                            <button className={styles.longbutton}>
-                                <div className={styles['longbutton-elements']}>
-                                    <div className={styles['longbutton-icon']}>
-                                        <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
+                        {data?.files.map((file, index) => (
+                            <div>
+                                <button className={styles.longbutton}>
+                                    <div className={styles['longbutton-elements']}>
+                                        <div className={styles['longbutton-icon']}>
+                                            <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
+                                        </div>
+                                        <div className={styles['longbutton-filename']}>{file.name.slice(0, 20)}</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.type}</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
+                                        <div className={styles.options}>
+                                            <img src="mycloud/share.png" alt="share"/>
+                                            <img src="mycloud/options.png" alt="options"/>
+                                        </div>
                                     </div>
-                                    <div className={styles['longbutton-filename']}>file_0004</div>
-                                    <div className={styles['longbutton-fileformat']}>pdf</div>
-                                    <div className={styles['longbutton-fileformat']}>2 MB</div>
-                                    <div className={styles.options}>
-                                        <img src="mycloud/share.png" alt="share"/>
-                                        <img src="mycloud/options.png" alt="options"/>
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                        <button className={styles.longbutton}>
-                            <div className={styles['longbutton-elements']}>
-                                <div className={styles['longbutton-icon']}>
-                                    <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
-                                </div>
-                                <div className={styles['longbutton-filename']}>file_3523</div>
-                                <div className={styles['longbutton-fileformat']}>jpg file</div>
-                                <div className={styles['longbutton-fileformat']}>10 MB</div>
-                                <div className={styles.options}>
-                                    <img src="mycloud/share.png" alt="share"/>
-                                    <img src="mycloud/options.png" alt="options"/>
-                                </div>
+                                </button>
                             </div>
-                        </button>
-                        <button className={styles.longbutton}>
-                            <div className={styles['longbutton-elements']}>
-                                <div className={styles['longbutton-icon']}>
-                                    <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
-                                </div>
-                                <div className={styles['longbutton-filename']}>file_2563</div>
-                                <div className={styles['longbutton-fileformat']}>exe file</div>
-                                <div className={styles['longbutton-fileformat']}>5 MB</div>
-                                <div className={styles.options}>
-                                    <img src="mycloud/share.png" alt="share"/>
-                                    <img src="mycloud/options.png" alt="options"/>
-                                </div>
-                            </div>
-                        </button>
+                        ))}
                     </div>
                 </div>
 

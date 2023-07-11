@@ -200,6 +200,10 @@
   background-color: #045791; /* Set the background color on hover */
   color: #ffffff; /* Set the text color on hover */
 }
+.pic:hover {
+  background-color: #045791; /* Set the background color on hover */
+  color: #ffffff; /* Set the text color on hover */
+}
 .doc:hover {
   background-color: #890965; /* Set the background color on hover */
   color: #ffffff; /* Set the text color on hover */
