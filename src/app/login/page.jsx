@@ -35,8 +35,9 @@ export default function Login() {
             .then(res => res.json())
             .then(data => {
                 if(data.success){
+                    console.log(data)
                     toast.success("Login successful");
-                    localStorage.setItem("access", data.token)
+                    localStorage.setItem("token", data.token)
                     router.push("/mycloud");
                 }
                 else {

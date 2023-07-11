@@ -1,8 +1,37 @@
-import React, {Fragment} from 'react';
+"use client"
+import React, {Fragment, useEffect, useState} from 'react';
 import styles from './mycloud.module.css';
 import Navbar from "../../components/Navbar/Navbar";
+import {baseUrl} from "@/app/api/api";
+import {toast} from "react-hot-toast";
+import {getAuth} from "@/app/api/auth";
 
 const HomePageLayout = () => {
+
+    const [data, setData] = useState(null);
+
+
+    useEffect(() => {
+        fetch(`${baseUrl}api/files`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setData(data)
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(data.message)
+            })
+    }, [])
+
+    // if(!data) return <div>Loading...</div>
+
+
     return (
         <Fragment>
             <Navbar/>
@@ -17,28 +46,35 @@ const HomePageLayout = () => {
                             <img src="mycloud/camera.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Pictures</p>
-                                <p className={styles['filecategories-text-number']}>100 files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count.image} files</p>
                             </div>
                         </button>
                         <button className={styles.doc}>
                             <img src="mycloud/documents.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Documents</p>
-                                <p className={styles['filecategories-text-number']}>100 files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count.document} files</p>
                             </div>
                         </button>
                         <button className={styles.vid}>
                             <img src="mycloud/video.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Videos</p>
-                                <p className={styles['filecategories-text-number']}>100 files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count.video} files</p>
                             </div>
                         </button>
-                        <button className={styles.aud}>
+                        <button className={`${styles.aud}`}>
                             <img src="mycloud/audio.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Audio</p>
-                                <p className={styles['filecategories-text-number']}>100 files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count.audio} files</p>
+                            </div>
+                        </button>
+                        <button className={`${styles.other}`}>
+                            <img src="mycloud/others.png" alt="Button Image"/>
+                            <div className={styles['filecategories-text']}>
+                                <p className={styles['filecategories-text-name']}>Others</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count.other} files</p>
                             </div>
                         </button>
                     </div>
@@ -128,7 +164,8 @@ const HomePageLayout = () => {
                         <div className={styles['right-group']}>
                             <div className={styles.addfl}>
                                 <button className={styles.addfiles}>
-                                    <img src="mycloud/addfiles.png" alt="Upload Icon" className={styles['upload-icon']} />
+                                    <img src="mycloud/addfiles.png" alt="Upload Icon"
+                                         className={styles['upload-icon']}/>
                                     <div className={styles.label}>Add new files</div>
                                 </button>
                             </div>
@@ -138,7 +175,7 @@ const HomePageLayout = () => {
                                     <div className={styles['stor-flex-grow']}></div>
                                 </div>
                                 <div className={styles['storage-meter']}>
-                                    <p className={styles.stor} style={{ fontWeight: 'normal' }}>
+                                    <p className={styles.stor} style={{fontWeight: 'normal'}}>
                                         75GB of used
                                     </p>
                                     <progress value="60" max="100"></progress>
@@ -152,8 +189,8 @@ const HomePageLayout = () => {
                                     <div className={styles['sharedbutton-elements']}>
                                         <div className={styles['sharedbutton-filename']}>Keynote files</div>
                                         <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user" />
-                                            <img src="avatar.png" alt="user" />
+                                            <img src="avatar.png" alt="user"/>
+                                            <img src="avatar.png" alt="user"/>
                                         </div>
                                     </div>
                                 </button>
@@ -161,7 +198,7 @@ const HomePageLayout = () => {
                                     <div className={styles['sharedbutton-elements']}>
                                         <div className={styles['sharedbutton-filename']}>Vacation photos</div>
                                         <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user" />
+                                            <img src="avatar.png" alt="user"/>
                                         </div>
                                     </div>
                                 </button>
@@ -169,8 +206,8 @@ const HomePageLayout = () => {
                                     <div className={styles['sharedbutton-elements']}>
                                         <div className={styles['sharedbutton-filename']}>Project report</div>
                                         <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user" />
-                                            <img src="mycloud/avatar.png" alt="user" />
+                                            <img src="avatar.png" alt="user"/>
+                                            <img src="mycloud/avatar.png" alt="user"/>
                                         </div>
                                     </div>
                                 </button>

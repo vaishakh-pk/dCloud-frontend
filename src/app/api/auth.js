@@ -2,7 +2,7 @@ import { baseUrl, post } from "./api";
 
 
 export function getAuth() {
-    return localStorage.getItem("accessToken");
+    return localStorage.getItem("token");
 }
 
 function setAuth(token) {

@@ -37,7 +37,7 @@ export default function Signup() {
             .then(data => {
                 if (data.success) {
                     toast.success("Register successful");
-                    localStorage.setItem("access", data.token)
+                    localStorage.setItem("token", data.token)
                     router.push("/mycloud");
                 } else {
                     console.log(data)
