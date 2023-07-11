@@ -514,3 +514,15 @@
   border-radius: 10px;
   border: 1px solid;
 }
+
+.upload-progress-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.image-container {
+  display: flex;
+
+}
