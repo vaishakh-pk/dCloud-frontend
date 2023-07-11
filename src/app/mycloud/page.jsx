@@ -4,10 +4,11 @@ import styles from './mycloud.module.css';
 import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
-import {getAuth} from "@/app/api/auth";
+import {useRouter} from "next/navigation";
 
 const HomePageLayout = () => {
 
+    const router = useRouter();
     const [data, setData] = useState(null);
 
 
@@ -137,7 +138,7 @@ const HomePageLayout = () => {
                     <div className={styles['right-content']}>
                         <div className={styles['right-group']}>
                             <div className={styles.addfl}>
-                                <button className={styles.addfiles}>
+                                <button style={{cursor: "pointer"}} className={styles.addfiles} onClick={() => router.push("/upload")}>
                                     <img src="mycloud/addfiles.png" alt="Upload Icon"
                                          className={styles['upload-icon']}/>
                                     <div className={styles.label}>Add new files</div>
