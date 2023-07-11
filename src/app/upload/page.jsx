@@ -25,42 +25,19 @@ function UploadPageLayout() {
                             </div>
                             Upload Progress
                         </h2>
-                        <div className={styles['progress-container']}>
-                            <div className={styles['file-progress']}>
-                                <div className={styles['grey-box']}>
-                                    <div className={styles['file-info']}>
-                                        <div className={styles['file-icon']}>
-                                            <img src="camera.png" alt="File Icon"/>
-                                        </div>
-                                        <div className={styles['file-details']}>
-                                            <div className={styles['file-name']}>example_file1.txt</div>
-                                        </div>
+                        <div className={styles['file-progress']}>
+                            <div className={styles['grey-box']}>
+                                <div className={styles['file-info']}>
+                                    <div className={styles['file-icon']}>
+                                        <img src="camera.png" alt="File Icon"/>
                                     </div>
-                                    <div className={styles['rectanglestorage']}>
-                                        <div className={styles['storage-meter']}>
-                                            <progress value="60" max="100"></progress>
-                                            <span>50%</span>
-                                            <img src="cross.png" alt="tick or cross" className={styles['end-image']}/>
-                                        </div>
+                                    <div className={styles['file-details']}>
+                                        <div className={styles['file-name']}>example_file1.txt</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={styles['file-progress']}>
-                                <div className={styles['grey-box']}>
-                                    <div className={styles['file-info']}>
-                                        <div className={styles['file-icon']}>
-                                            <img src="camera.png" alt="File Icon"/>
-                                        </div>
-                                        <div className={styles['file-details']}>
-                                            <div className={styles['file-name']}>example_file2.txt</div>
-                                        </div>
-                                    </div>
-                                    <div className={styles['rectanglestorage']}>
-                                        <div className={styles['storage-meter']}>
-                                            <progress value="100" max="100"></progress>
-                                            <span>100%</span>
-                                            <img src="tick.png" alt="tick or cross" className={styles['end-image']}/>
-                                        </div>
+                                <div className={styles['rectanglestorage']}>
+                                    <div className={styles['storage-meter']}>
+                                        <img src="cross.png" alt="tick or cross" className={styles['end-image']}/>
                                     </div>
                                 </div>
                             </div>
