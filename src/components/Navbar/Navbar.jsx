@@ -25,8 +25,8 @@ function Navbar() {
                 <button onClick={() => router.push('/favourites')} className={`${styles.button1} ${styles.home}`}>Favorites</button>
                 <button onClick={() => router.push('/upload')} className={`${styles.button1} ${styles.home}`}>Upload Files</button>
             </div>
-            <div className={styles.leftbuttonbottom}>
-                <button className={styles.button2}>Profile</button>
+            <div className={styles.leftbuttonbottom} >
+                <button className={styles.button2} onClick={() => router.push('/profile')}>Profile</button>
                 <button className={styles.button2} onClick={onLogout}>Log out</button>
             </div>
         </div>

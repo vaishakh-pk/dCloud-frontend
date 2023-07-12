@@ -29,7 +29,7 @@ const Page = () => {
             })
             .catch((err) => {
                 console.error(err);
-                toast.error(data.message)
+                toast.error(err)
             })
     }
 

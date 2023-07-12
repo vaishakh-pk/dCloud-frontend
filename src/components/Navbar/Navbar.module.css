@@ -1,5 +1,3 @@
-
-
 .left-side {
     position: fixed;
     width:200px;
@@ -15,6 +13,7 @@
     padding: 40px;
 }
 .profile-photo img {
+    background-color: white;
     width: 50px;
     height: 50px;
     border-radius: 50%;

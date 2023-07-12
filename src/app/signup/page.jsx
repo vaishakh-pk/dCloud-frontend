@@ -46,7 +46,7 @@ export default function Signup() {
             })
             .catch((err) => {
                 console.error(err);
-                toast.error(data.message)
+                toast.error(err)
             })
     }
 

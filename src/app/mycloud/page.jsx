@@ -30,6 +30,10 @@ const HomePageLayout = () => {
             })
     }, [])
 
+    const onDownloadClick = (cid) => {
+        const url = `${baseUrl}api/file/download/${cid}/`;
+        window.open(url, '_blank');
+    };
 
 
 
@@ -123,7 +127,8 @@ const HomePageLayout = () => {
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
                                         <div className={styles.options}>
-                                            <img src="mycloud/share.png" alt="share"/>
+                                            <img onClick={() => onDownloadClick(file.cid)} style={{cursor: "pointer"}}
+                                                 src="mycloud/download.png" alt="share"/>
                                             <img src="mycloud/options.png" alt="options"/>
                                         </div>
                                     </div>
@@ -138,7 +143,8 @@ const HomePageLayout = () => {
                     <div className={styles['right-content']}>
                         <div className={styles['right-group']}>
                             <div className={styles.addfl}>
-                                <button style={{cursor: "pointer"}} className={styles.addfiles} onClick={() => router.push("/upload")}>
+                                <button style={{cursor: "pointer"}} className={styles.addfiles}
+                                        onClick={() => router.push("/upload")}>
                                     <img src="mycloud/addfiles.png" alt="Upload Icon"
                                          className={styles['upload-icon']}/>
                                     <div className={styles.label}>Add new files</div>
