@@ -36,7 +36,6 @@ const HomePageLayout = () => {
     };
 
 
-
     return (
         <Fragment>
             <Navbar/>

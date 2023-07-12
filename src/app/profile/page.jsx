@@ -5,10 +5,17 @@ import styles from "./profile.module.css";
 import Link from "next/link";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
+import Modal from "@/components/Modal/Modal";
 
 const Page = () => {
 
     const [user, setUser] = useState();
+    const [showModal, setShowModal] = useState(false);
+
+    const handleModalClose = () => {
+        setShowModal(false);
+    }
+
 
     useEffect(() => {
         if(!localStorage.getItem("token")) {
@@ -37,6 +44,10 @@ const Page = () => {
             })
     }, [user]);
 
+    const onEditClick = () => {
+        setShowModal(true);
+    }
+
     return (
         <Fragment>
             <Navbar/>
@@ -47,9 +58,7 @@ const Page = () => {
                         <div className={styles.profileDetails}>
                             <div className={styles.profileDetailsLeft}>
                                 <img src={user?.avatar?.url} alt={user?.name} />
-                                {/*<Link to="/profile/update">*/}
-                                    <button>Edit Profile</button>
-                                {/*</Link>*/}
+                                    <button onClick={onEditClick}>Edit Profile</button>
                             </div>
                             <div className={styles.profileDetailsRight}>
                                 <div>
@@ -73,6 +82,9 @@ const Page = () => {
                     </div>
                 </div>
             </div>
+            <Modal open={showModal} onClose={handleModalClose}>
+                this is modla
+            </Modal>
         </Fragment>
     );
 };
