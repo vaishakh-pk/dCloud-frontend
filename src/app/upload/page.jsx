@@ -3,6 +3,8 @@ import React, {Fragment, useState, useEffect} from 'react';
 import styles from './upload.module.css';
 import Navbar from "@/components/Navbar/Navbar";
 import {ClipLoader, MoonLoader} from "react-spinners";
+import {baseUrl} from "@/app/api/api";
+import {toast} from "react-hot-toast";
 
 const override = {
     display: "block",
@@ -20,7 +22,47 @@ function UploadPageLayout() {
     }
 
     useEffect(() => {
-        console.log(files);
+        if (files.length > 0 && files[0]) {
+            if (files[0].length === 1) {
+                // Call your API here
+                // yourApiCall()
+                //     .then(() => {
+                //         // Delete the file at index 0
+                //         const newData = files.filter((file, i) => i !== 0);
+                //         setFiles(newData);
+                //     })
+                //     .catch((error) => {
+                //         console.log('API call failed:', error);
+                //     });
+                const formData = new FormData();
+                formData.append("file", files[0][0]);
+                fetch(`${baseUrl}api/upload`, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        if(data.success) {
+                            toast.success(`${files[0][0].name} uploaded`)
+                        } else {
+                            if(data.message === "Duplicate cid entered")
+                                toast.error("file already exites");
+                            else
+                                toast.error(data.message)
+                        }
+                        const newData = files.filter((file, i) => i !== 0);
+                        setFiles(newData);
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        toast.error(err)
+                    })
+            }
+        }
     }, [files]);
 
 
@@ -51,7 +93,6 @@ function UploadPageLayout() {
                     {files?.length > 0 && <div className={styles['upload-progress-box']}>
                         <h2 className={styles['upload-progress-heading']}>
                             <div className={styles['image-container']}>
-
                                 <MoonLoader
                                     color="#1D297C"
                                     size={20}

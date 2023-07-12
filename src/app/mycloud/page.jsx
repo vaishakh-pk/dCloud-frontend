@@ -26,11 +26,11 @@ const HomePageLayout = () => {
             })
             .catch((err) => {
                 console.error(err);
-                toast.error(data.message)
+                toast.error(err)
             })
     }, [])
 
-    // if(!data) return <div>Loading...</div>
+
 
 
     return (
@@ -47,35 +47,35 @@ const HomePageLayout = () => {
                             <img src="mycloud/camera.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Pictures</p>
-                                <p className={styles['filecategories-text-number']}>{data?.count.image} files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count?.image} files</p>
                             </div>
                         </button>
                         <button className={styles.doc}>
                             <img src="mycloud/documents.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Documents</p>
-                                <p className={styles['filecategories-text-number']}>{data?.count.document} files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count?.document} files</p>
                             </div>
                         </button>
                         <button className={styles.vid}>
                             <img src="mycloud/video.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Videos</p>
-                                <p className={styles['filecategories-text-number']}>{data?.count.video} files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count?.video} files</p>
                             </div>
                         </button>
                         <button className={`${styles.aud}`}>
                             <img src="mycloud/audio.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Audio</p>
-                                <p className={styles['filecategories-text-number']}>{data?.count.audio} files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count?.audio} files</p>
                             </div>
                         </button>
                         <button className={`${styles.other}`}>
                             <img src="mycloud/others.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Others</p>
-                                <p className={styles['filecategories-text-number']}>{data?.count.other} files</p>
+                                <p className={styles['filecategories-text-number']}>{data?.count?.other} files</p>
                             </div>
                         </button>
                     </div>
@@ -151,7 +151,7 @@ const HomePageLayout = () => {
                                 </div>
                                 <div className={styles['storage-meter']}>
                                     <p className={styles.stor} style={{fontWeight: 'normal'}}>
-                                        75GB of used
+                                        {data?.storageInGB.toFixed(2)} GB Used
                                     </p>
                                     <progress value="60" max="100"></progress>
                                 </div>
