@@ -13,7 +13,12 @@ const Page = () => {
 
     const router = useRouter();
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        avatar: "",
+    });
+
     const [showModal, setShowModal] = useState(false);
 
     const handleModalClose = () => {
@@ -47,18 +52,11 @@ const Page = () => {
                 console.error(err);
                 toast.error(err)
             })
-    }, [user]);
+    }, []);
 
     const onEditClick = () => {
         setShowModal(true);
     }
-
-
-    const [userData, setUserData] = useState({
-        name: "",
-        email: "",
-        avatar: ""
-    });
 
 
     const handleImageChange = (event) => {
@@ -66,8 +64,8 @@ const Page = () => {
         const reader = new FileReader();
         reader.readAsDataURL(image);
         reader.onloadend = () => {
-            setUserData({
-                ...userData,
+            setUser({
+                ...user,
                 avatar: reader.result
             })
         }
@@ -75,24 +73,36 @@ const Page = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(userData)
         const formData = new FormData();
-        formData.append("name", userData.name);
-        formData.append("email", userData.email);
-        formData.append("password", userData.password);
-        formData.append("avatar", userData.avatar);
-
+        formData.append("name", user.name);
+        formData.append("email", user.email);
+        formData.append("avatar", user.avatar);
+        console.log(user)
         console.log(formData)
-
+        fetch(`${baseUrl}api/auth/profile/update`, {
+            method: "PUT",
+            headers: {
+                // "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.success) {
+                    toast.success("Profile updated successfully");
+                    setShowModal(false);
+                    setUser(data.user)
+                } else {
+                    toast.error(data.message)
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
     }
-
-    const handleRegisterEmailChange = async (event) => {
-        setUserData({
-            ...userData,
-            [event.target.name]: event.target.value
-        });
-    }
-
 
     return (
         <Fragment>
@@ -103,7 +113,7 @@ const Page = () => {
                         <h2>My Profile</h2>
                         <div className={styles.profileDetails}>
                             <div className={styles.profileDetailsLeft}>
-                                <img src={user?.avatar?.url} alt={user?.name} />
+                                <img src={user?.avatar.url} alt={user?.name} />
                                     <button onClick={onEditClick}>Edit Profile</button>
                             </div>
                             <div className={styles.profileDetailsRight}>
@@ -129,7 +139,6 @@ const Page = () => {
                 </div>
 
                     <Modal open={showModal} onClose={handleModalClose}>
-
                         <div className={`${styles.wrapperContainer}`} >
                             <div className={`${styles.wrapper}`}>
                                 <div className={`${styles['title-text']}`}>
@@ -144,8 +153,8 @@ const Page = () => {
                                                     type="text"
                                                     placeholder="Name"
                                                     name="name"
-                                                    value={userData.name}
-                                                    onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })}
+                                                    value={user?.name}
+                                                    onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                                                 />
                                             </div>
                                             <div className={`${styles.field} ${styles.flex}`}>
@@ -154,13 +163,13 @@ const Page = () => {
                                                     type="text"
                                                     placeholder="Email Address"
                                                     name="email"
-                                                    value={userData.email}
-                                                    onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })}
+                                                    value={user?.email}
+                                                    onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                                                 />
                                             </div>
                                             <div className={`${styles.field} ${styles.FileSelector}`}>
-                                                {userData.avatar ? (
-                                                    <img className={`${styles.avatar}`} src={userData.avatar} alt="Uploaded Avatar" />
+                                                {user?.avatar ? (
+                                                    <img className={`${styles.avatar}`} src={user?.avatar} alt="Uploaded Avatar" />
                                                 ) : (
                                                     <AccountCircleIcon fontSize="large" />
                                                 )}
