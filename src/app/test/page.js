@@ -1,11 +1,25 @@
-import React from 'react';
+"use client"
+import React, { useState } from "react";
+import "./test.css";
+import Modal from "../../components/Preview/preview";
 
-const Page = () => {
+function Test() {
+    const [modalOpen, setModalOpen] = useState(false);
+
     return (
-        <div>
-            hi
+        <div className="Test">
+            <button
+                className="openModalBtn"
+                onClick={() => {
+                    setModalOpen(true);
+                }}
+            >
+                Open
+            </button>
+
+            {modalOpen && <Modal setOpenModal={setModalOpen} />}
         </div>
     );
-};
+}
 
-export default Page;
+export default Test;
