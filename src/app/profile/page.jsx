@@ -20,6 +20,7 @@ const Page = () => {
         avatar: "",
     });
     const [loading, setLoading] = useState(false);
+    const [isAvatarChanged, setIsAvatarChanged] = useState(false);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -71,6 +72,7 @@ const Page = () => {
                 avatar: reader.result
             })
         }
+        setIsAvatarChanged(true);
     };
 
     const handleSubmit = (event) => {
@@ -78,7 +80,8 @@ const Page = () => {
         const formData = new FormData();
         formData.append("name", user.name);
         formData.append("email", user.email);
-        formData.append("avatar", user.avatar);
+        if(isAvatarChanged)
+            formData.append("avatar", user.avatar);
         console.log(user)
         setLoading(true)
         fetch(`${baseUrl}api/auth/profile/update`, {
