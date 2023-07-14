@@ -2,12 +2,16 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./profile.module.css";
-import Link from "next/link";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
 import Modal from "@/components/Modal/Modal";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {useRouter} from "next/navigation";
+
 
 const Page = () => {
+
+    const router = useRouter();
 
     const [user, setUser] = useState();
     const [showModal, setShowModal] = useState(false);
@@ -19,7 +23,8 @@ const Page = () => {
 
     useEffect(() => {
         if(!localStorage.getItem("token")) {
-            navigate("/login");
+            toast("Please login to continue")
+            router.push("/login");
         }
 
         fetch(`${baseUrl}api/auth/profile`, {
@@ -47,6 +52,47 @@ const Page = () => {
     const onEditClick = () => {
         setShowModal(true);
     }
+
+
+    const [userData, setUserData] = useState({
+        name: "",
+        email: "",
+        avatar: ""
+    });
+
+
+    const handleImageChange = (event) => {
+        const image = event.target.files?.[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onloadend = () => {
+            setUserData({
+                ...userData,
+                avatar: reader.result
+            })
+        }
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // console.log(userData)
+        const formData = new FormData();
+        formData.append("name", userData.name);
+        formData.append("email", userData.email);
+        formData.append("password", userData.password);
+        formData.append("avatar", userData.avatar);
+
+        console.log(formData)
+
+    }
+
+    const handleRegisterEmailChange = async (event) => {
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value
+        });
+    }
+
 
     return (
         <Fragment>
@@ -81,10 +127,57 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
+
+                    <Modal open={showModal} onClose={handleModalClose}>
+
+                        <div className={`${styles.wrapperContainer}`} >
+                            <div className={`${styles.wrapper}`}>
+                                <div className={`${styles['title-text']}`}>
+                                    <div className={`${styles['title']} ${styles.login}`}>Update Profile</div>
+                                </div>
+                                <div className={`${styles['form-container']}`}>
+                                    <div className={`${styles['form-inner']}`}>
+                                        <form className={`${styles.signup}`} onSubmit={handleSubmit}>
+                                            <div className={`${styles.field} ${styles.flex}`}>
+                                                <input
+                                                    className={`${styles.inputBox}`}
+                                                    type="text"
+                                                    placeholder="Name"
+                                                    name="name"
+                                                    value={userData.name}
+                                                    onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })}
+                                                />
+                                            </div>
+                                            <div className={`${styles.field} ${styles.flex}`}>
+                                                <input
+                                                    className={`${styles.inputBox}`}
+                                                    type="text"
+                                                    placeholder="Email Address"
+                                                    name="email"
+                                                    value={userData.email}
+                                                    onChange={(e) => setUserData({ ...userData, [e.target.name]: e.target.value })}
+                                                />
+                                            </div>
+                                            <div className={`${styles.field} ${styles.FileSelector}`}>
+                                                {userData.avatar ? (
+                                                    <img className={`${styles.avatar}`} src={userData.avatar} alt="Uploaded Avatar" />
+                                                ) : (
+                                                    <AccountCircleIcon fontSize="large" />
+                                                )}
+                                                <input type="file" accept="image/*" name="avatar" onChange={handleImageChange} />
+                                            </div>
+                                            <div className={`${styles.field} ${styles.btn}`}>
+                                                <div className={`${styles['btn-layer']}`}></div>
+                                                <input type="submit" value="SAVE" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </Modal>
             </div>
-            <Modal open={showModal} onClose={handleModalClose}>
-                this is modla
-            </Modal>
         </Fragment>
     );
 };
