@@ -7,6 +7,7 @@ import {toast} from "react-hot-toast";
 import Modal from "@/components/Modal/Modal";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useRouter} from "next/navigation";
+import {ClipLoader} from "react-spinners";
 
 
 const Page = () => {
@@ -18,6 +19,7 @@ const Page = () => {
         email: "",
         avatar: "",
     });
+    const [loading, setLoading] = useState(false);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +29,7 @@ const Page = () => {
 
 
     useEffect(() => {
-        if(!localStorage.getItem("token")) {
+        if (!localStorage.getItem("token")) {
             toast("Please login to continue")
             router.push("/login");
         }
@@ -78,7 +80,7 @@ const Page = () => {
         formData.append("email", user.email);
         formData.append("avatar", user.avatar);
         console.log(user)
-        console.log(formData)
+        setLoading(true)
         fetch(`${baseUrl}api/auth/profile/update`, {
             method: "PUT",
             headers: {
@@ -97,24 +99,53 @@ const Page = () => {
                 } else {
                     toast.error(data.message)
                 }
+                setLoading(false)
             })
             .catch((err) => {
                 console.error(err);
                 toast.error(err)
-            })
+                setLoading(false)
+            });
     }
 
     return (
         <Fragment>
-            <Navbar/>
-                <div className={styles.container}>
+            <div className={styles['left-side']}>
+                <div className={styles['profile-photo']}>
+                    <img src={user?.avatar.url ? user?.avatar.url : "/avatar.png"} alt="Profile Photo"/>
+                </div>
+                <div>
+                    <button onClick={() => router.push('/mycloud')} className={`${styles.button1} ${styles.home}`}>My
+                        Cloud
+                    </button>
+                    <button onClick={() => router.push('/shared')} className={`${styles.button1} ${styles.home}`}>Shared
+                        Files
+                    </button>
+                    <button onClick={() => router.push('/favourites')}
+                            className={`${styles.button1} ${styles.home}`}>Favorites
+                    </button>
+                    <button onClick={() => router.push('/upload')} className={`${styles.button1} ${styles.home}`}>Upload
+                        Files
+                    </button>
+                </div>
+                <div className={styles.leftbuttonbottom}>
+                    <button className={styles.button2} onClick={() => router.push('/profile')}>Profile</button>
+                    <button className={styles.button2} onClick={() => {
+                        toast.success("Logged out successfully");
+                        localStorage.removeItem("token");
+                        router.push("/login");
+                    }}>Log out
+                    </button>
+                </div>
+            </div>
+            <div className={styles.container}>
                 <div className={styles['main-content']}>
                     <div className={styles.profile}>
                         <h2>My Profile</h2>
                         <div className={styles.profileDetails}>
                             <div className={styles.profileDetailsLeft}>
-                                <img src={user?.avatar.url} alt={user?.name} />
-                                    <button onClick={onEditClick}>Edit Profile</button>
+                                <img src={user?.avatar.url} alt={user?.name}/>
+                                <button onClick={onEditClick}>Edit Profile</button>
                             </div>
                             <div className={styles.profileDetailsRight}>
                                 <div>
@@ -138,54 +169,63 @@ const Page = () => {
                     </div>
                 </div>
 
-                    <Modal open={showModal} onClose={handleModalClose}>
-                        <div className={`${styles.wrapperContainer}`} >
-                            <div className={`${styles.wrapper}`}>
-                                <div className={`${styles['title-text']}`}>
-                                    <div className={`${styles['title']} ${styles.login}`}>Update Profile</div>
-                                </div>
-                                <div className={`${styles['form-container']}`}>
-                                    <div className={`${styles['form-inner']}`}>
-                                        <form className={`${styles.signup}`} onSubmit={handleSubmit}>
-                                            <div className={`${styles.field} ${styles.flex}`}>
-                                                <input
-                                                    className={`${styles.inputBox}`}
-                                                    type="text"
-                                                    placeholder="Name"
-                                                    name="name"
-                                                    value={user?.name}
-                                                    onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
-                                                />
-                                            </div>
-                                            <div className={`${styles.field} ${styles.flex}`}>
-                                                <input
-                                                    className={`${styles.inputBox}`}
-                                                    type="text"
-                                                    placeholder="Email Address"
-                                                    name="email"
-                                                    value={user?.email}
-                                                    onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
-                                                />
-                                            </div>
-                                            <div className={`${styles.field} ${styles.FileSelector}`}>
-                                                {user?.avatar ? (
-                                                    <img className={`${styles.avatar}`} src={user?.avatar} alt="Uploaded Avatar" />
-                                                ) : (
-                                                    <AccountCircleIcon fontSize="large" />
-                                                )}
-                                                <input type="file" accept="image/*" name="avatar" onChange={handleImageChange} />
-                                            </div>
-                                            <div className={`${styles.field} ${styles.btn}`}>
-                                                <div className={`${styles['btn-layer']}`}></div>
-                                                <input type="submit" value="SAVE" />
-                                            </div>
-                                        </form>
-                                    </div>
+                <Modal open={showModal} onClose={handleModalClose}>
+                    <div className={`${styles.wrapperContainer}`}>
+                        <div className={`${styles.wrapper}`}>
+                            <div className={`${styles['title-text']}`}>
+                                <div className={`${styles['title']} ${styles.login}`}>Update Profile</div>
+                            </div>
+                            <div className={`${styles['form-container']}`}>
+                                <div className={`${styles['form-inner']}`}>
+                                    <form className={`${styles.signup}`} onSubmit={handleSubmit}>
+                                        <div className={`${styles.field} ${styles.flex}`}>
+                                            <input
+                                                className={`${styles.inputBox}`}
+                                                type="text"
+                                                placeholder="Name"
+                                                name="name"
+                                                value={user?.name}
+                                                onChange={(e) => setUser({...user, [e.target.name]: e.target.value})}
+                                            />
+                                        </div>
+                                        <div className={`${styles.field} ${styles.flex}`}>
+                                            <input
+                                                className={`${styles.inputBox}`}
+                                                type="text"
+                                                placeholder="Email Address"
+                                                name="email"
+                                                value={user?.email}
+                                                onChange={(e) => setUser({...user, [e.target.name]: e.target.value})}
+                                            />
+                                        </div>
+                                        <div className={`${styles.field} ${styles.FileSelector}`}>
+                                            {user?.avatar ? (
+                                                <img className={`${styles.avatar}`} src={user?.avatar.url}
+                                                     alt="Uploaded Avatar"/>
+                                            ) : (
+                                                <AccountCircleIcon fontSize="large"/>
+                                            )}
+                                            <input type="file" accept="image/*" name="avatar"
+                                                   onChange={handleImageChange}/>
+                                        </div>
+                                        <div className={`${styles.field} ${styles.btn}`}>
+                                            <div className={`${styles['btn-layer']}`}></div>
+                                            {loading ?
+                                            <ClipLoader
+                                                color="#fffffd"
+                                                size={20}
+                                            /> :
+                                            <input type="submit" value="SAVE"/>
+                                            }
+
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    </Modal>
+                </Modal>
             </div>
         </Fragment>
     );
