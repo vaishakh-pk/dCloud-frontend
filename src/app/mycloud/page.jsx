@@ -5,11 +5,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
+import Modal from "@/components/Preview/preview";
 
 const HomePageLayout = () => {
 
     const router = useRouter();
     const [data, setData] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
 
     useEffect(() => {
@@ -40,6 +42,7 @@ const HomePageLayout = () => {
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
+                {modalOpen && <Modal setOpenModal={setModalOpen} />}
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}>
                         <input type="text" className={styles['search-input']} placeholder="Search"/>
@@ -117,7 +120,8 @@ const HomePageLayout = () => {
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files.map((file, index) => (
                             <div>
-                                <button className={styles.longbutton}>
+                                <button className={styles.longbutton} onClick={() => {
+                                    setModalOpen(true);}}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
                                             <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
