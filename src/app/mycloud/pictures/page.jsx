@@ -19,7 +19,7 @@ function FavoritesLayout() {
             .then(res => res.json())
             .then(data => {
                 if(data.success)
-                    setData(data.images.files)
+                    setData(data.images)
             })
             .catch((err) => {
                 console.error(err);
@@ -44,14 +44,14 @@ function FavoritesLayout() {
                             <img src="/mycloud/camera.png" alt="Button Image" />
                             <div className={styles['favorites-button-text']}>
                                 <p className={styles['favorites-button-text-name']}>Pictures</p>
-                                <p className={styles['favorites-button-text-number']}>100 files</p>
+                                <p className={styles['favorites-button-text-number']}>{`${data?.total} files`}</p>
                             </div>
                         </button>
                     </div>
 
                     <div className={styles.files}>
                         <p className={styles['files-font']}>Files</p>
-                        {data?.map((file, index) => (
+                        {data?.files.map((file, index) => (
                             <button key={index} className={styles['files-buttons']}>
                                 <img src={file.url} alt="Profile Photo" />
                                 <p className={styles.filename}>{file.name.slice(0, 15)}...</p>
