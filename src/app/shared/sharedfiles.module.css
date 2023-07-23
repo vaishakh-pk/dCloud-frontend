@@ -231,7 +231,7 @@
 .longbutton-options img {
     width: 25px;
     height: 25px;
-    padding: 5px, 5px;
+    padding: 5px 5px;
 }
 
 .longbutton-filename {
@@ -248,4 +248,96 @@
 
 .share-option-button-adjust {
     padding-left: 50px;
+}
+
+
+.recentfiles {
+    padding: 10px;
+}
+.recentflcapt {
+    font-weight: bold;
+    color: #141d58;
+}
+.recentfiles button {
+    display: block; /* Make buttons block-level elements */
+    margin-bottom: 15px; /* Add vertical spacing between buttons */
+}
+
+.longbutton {
+    background-color: #ffffff;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 16px;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+
+}
+/*
+.longbutton1 {
+  width: 900px;
+  height: 60px;
+  padding-right: 100px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 10px;
+  justify-content:space-evenly;
+}*/
+.longbutton-elements {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.longbutton-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #0473c2;
+}
+.longbutton-icon img {
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
+/* .longbutton-share,
+.longbutton-options
+{
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: none;
+}
+.longbutton-share img,
+.longbutton-options img
+ {
+  width: 25px;
+  height: 25px;
+  padding: 5px,5px;
+} */
+
+.options img {
+    width: 25px;
+    height: 25px;
+    padding: 5px 5px;
+}
+
+.longbutton-filename {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d297c;
+}
+.longbutton-fileformat {
+    font-size: 15px;
+    font-weight: lighter;
+    color: #1d297c
+}
+.share-option-button-adjust {
+    padding-left: 50px;
+}
+.longbutton:hover {
+    background-color: #b8b8b8;
+    color: black;
 }

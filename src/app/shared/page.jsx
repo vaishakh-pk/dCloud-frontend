@@ -1,96 +1,71 @@
-import React, {Fragment} from 'react';
+"use client"
+import React, {Fragment, useState, useEffect} from 'react';
 import styles from './sharedfiles.module.css';
 import Navbar from "../../components/Navbar/Navbar";
+import {baseUrl} from "@/app/api/api";
+import {toast} from "react-hot-toast";
+import Menu from "@/components/Menu/Menu";
 
 const SharedFilesLayout = () => {
+
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        fetch(`${baseUrl}api/files/shared`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setData(data)
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
+    }, [])
+
     return (
         <Fragment>
-            <Navbar />
+            <Navbar/>
             <div className={styles.container}>
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}>
-                        <input type="text" className={styles['search-input']} placeholder="Search" />
+                        <input type="text" className={styles['search-input']} placeholder="Search"/>
                     </div>
 
                     <div className={styles.sharedfiles}>
                         <p className={styles.sharedfilesfont}>Your shared files</p>
-                        <button className={styles.filesbutton}>
-                            <div className={styles.sharelistphoto}>
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                            </div>
-                            Vacation Photos
-                            <div className={styles.numberoffile}>100 files</div>
-                        </button>
-                        <button className={styles.filesbutton}>
-                            <div className={styles.sharelistphoto}>
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                            </div>
-                            Project Report
-                            <div className={styles.numberoffile}>200 files</div>
-                        </button>
-                        <button className={styles.filesbutton}>
-                            <div className={styles.sharelistphoto}>
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                                <img src="avatar.png" alt="Profile Photo" />
-                            </div>
-                            Memes
-                            <div className={styles.numberoffile}>300 files</div>
-                        </button>
-                        <button className={styles.plusbutton}>
-                            <img src="plus.png" alt="Button Image" />
-                            <div className={styles.numberoffilehid}>.</div>
-                        </button>
                     </div>
 
                     <div className={styles.recentfiles}>
-                        <p className={styles.recentflcapt}>Shared recently</p>
-                        <div className={styles.longbuttoncontainer}>
-                            <button className={styles.longbutton1}>
-                                <div className={styles['longbutton-elements']}>
-                                    <div className={styles['longbutton-icon']}>
-                                        <img src="shared/camerawhite.png" alt="Profile Photo" />
+                        {data?.files?.map((file, index) => (
+                            <div key={index} title={file.name}>
+                                <button className={styles.longbutton}>
+                                    <div className={styles['longbutton-elements']}>
+                                        <div className={styles['longbutton-icon']}>
+                                            <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
+                                        </div>
+                                        <div className={styles['longbutton-filename']}>{file.name.slice(0, 20)}</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.type}</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
+                                        <div className={styles.options}>
+                                            <Menu cid={file.cid}
+                                                  id={file._id}
+                                                  isFavorite={file.isFavorite}
+                                                  downloadMenu={true}
+                                                  removeShareMenu={true}
+                                            />
+                                        </div>
                                     </div>
-                                    <div className={styles['longbutton-filename']}>file_0001</div>
-                                    <div className={styles['longbutton-fileformat']}>pdf</div>
-                                    <div className={styles['longbutton-fileformat']}>filesize</div>
-                                </div>
-                            </button>
-                            <div className={styles['share-option-button-adjust']}>
-                                <button className={styles['longbutton-share']}>
-                                    <img src="shared/share.png" alt="share" />
-                                </button>
-                                <button className={styles['longbutton-options']}>
-                                    <img src="shared/options.png" alt="options" />
                                 </button>
                             </div>
-                        </div>
-                        <div className={styles.longbuttoncontainer}>
-                            <button className={styles.longbutton1}>
-                                <div className={styles['longbutton-elements']}>
-                                    <div className={styles['longbutton-icon']}>
-                                        <img src="shared/camerawhite.png" alt="Profile Photo" />
-                                    </div>
-                                    <div className={styles['longbutton-filename']}>file_0002</div>
-                                    <div className={styles['longbutton-fileformat']}>png</div>
-                                    <div className={styles['longbutton-fileformat']}>filesize</div>
-                                </div>
-                            </button>
-                            <div className={styles['share-option-button-adjust']}>
-                                <button className={styles['longbutton-share']}>
-                                    <img src="shared/share.png" alt="share" />
-                                </button>
-                                <button className={styles['longbutton-options']}>
-                                    <img src="shared/options.png" alt="options" />
-                                </button>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
+
                 </div>
             </div>
         </Fragment>

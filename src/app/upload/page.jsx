@@ -24,16 +24,6 @@ function UploadPageLayout() {
     useEffect(() => {
         if (files.length > 0 && files[0]) {
             if (files[0].length === 1) {
-                // Call your API here
-                // yourApiCall()
-                //     .then(() => {
-                //         // Delete the file at index 0
-                //         const newData = files.filter((file, i) => i !== 0);
-                //         setFiles(newData);
-                //     })
-                //     .catch((error) => {
-                //         console.log('API call failed:', error);
-                //     });
                 const formData = new FormData();
                 formData.append("file", files[0][0]);
                 fetch(`${baseUrl}api/upload`, {

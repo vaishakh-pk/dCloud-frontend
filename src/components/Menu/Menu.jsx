@@ -18,7 +18,16 @@ import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 
-export default function AccountMenu({cid, id, isFavorite}) {
+export default function AccountMenu({
+                                        cid,
+                                        id,
+                                        isFavorite,
+                                        downloadMenu,
+                                        shareMenu,
+                                        favoriteMenu,
+                                        deleteMenu,
+                                        removeShareMenu
+                                    }) {
 
     const router = useRouter()
 
@@ -86,10 +95,10 @@ export default function AccountMenu({cid, id, isFavorite}) {
     const confirmShare = () => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-        if(!emailRegex.test(shareEmail)) {
+        if (!emailRegex.test(shareEmail)) {
             toast.error("Invalid email")
             return;
-        }else {
+        } else {
             console.log(shareEmail)
             fetch(`${baseUrl}api/file/share/${id}`, {
                 method: "POST",
@@ -106,10 +115,9 @@ export default function AccountMenu({cid, id, isFavorite}) {
                         toast.success(`File shared with ${shareEmail}`)
                         setShareEmail("")
                         setOpenModal(false)
-                    }else {
+                    } else {
                         toast.error(data.message)
                     }
-
                 })
                 .catch((err) => {
                     console.error(err);
@@ -118,6 +126,30 @@ export default function AccountMenu({cid, id, isFavorite}) {
         }
     }
 
+    const onRemoveShareClick = () => {
+        fetch(`${baseUrl}api/file/shared/remove/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.success) {
+                    toast.success("Removed from favorites")
+
+                } else {
+                    toast.error(data.message)
+                    window.location.reload()
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
+    }
 
     return (
         <React.Fragment>
@@ -131,7 +163,7 @@ export default function AccountMenu({cid, id, isFavorite}) {
                 >
                     <TextField value={shareEmail}
                                type={"email"}
-                               onChange={(e) => setShareEmail(e.target.value) }
+                               onChange={(e) => setShareEmail(e.target.value)}
                                fullWidth label="Enter the email"
                                id="fullWidth"/>
                     <Button onClick={confirmShare}>Share</Button>
@@ -187,30 +219,36 @@ export default function AccountMenu({cid, id, isFavorite}) {
                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
-                <MenuItem onClick={onDownloadClick}>
+                {downloadMenu && <MenuItem onClick={onDownloadClick}>
                     <ListItemIcon>
                         <DownloadIcon/>
                     </ListItemIcon>
                     Download
-                </MenuItem>
-                <MenuItem onClick={onFavotireClick}>
+                </MenuItem>}
+                {favoriteMenu && <MenuItem onClick={onFavotireClick}>
                     <ListItemIcon>
                         <GradeIcon/>
                     </ListItemIcon>
                     {favorite ? 'Remove from Favorite' : 'Add to Favorite'}
-                </MenuItem>
-                <MenuItem onClick={onShareClick}>
+                </MenuItem>}
+                {shareMenu && <MenuItem onClick={onShareClick}>
                     <ListItemIcon>
                         <ShareIcon/>
                     </ListItemIcon>
                     Share
-                </MenuItem>
-                <MenuItem onClick={onDeleteClick}>
+                </MenuItem>}
+                {deleteMenu && <MenuItem onClick={onDeleteClick}>
                     <ListItemIcon>
                         <DeleteIcon/>
                     </ListItemIcon>
                     Delete
-                </MenuItem>
+                </MenuItem>}
+                {removeShareMenu && <MenuItem onClick={onRemoveShareClick}>
+                    <ListItemIcon>
+                        <ShareIcon/>
+                    </ListItemIcon>
+                    Remove from Share
+                </MenuItem>}
             </Menu>
         </React.Fragment>
     );

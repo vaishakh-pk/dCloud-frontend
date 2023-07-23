@@ -11,6 +11,7 @@ import Menu from "@/components/Menu/Menu";
 const HomePageLayout = () => {
 
     const router = useRouter();
+
     const [data, setData] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -117,7 +118,8 @@ const HomePageLayout = () => {
                         {data?.files?.map((file, index) => (
                             <div key={index} title={file.name}>
                                 <button className={styles.longbutton} onClick={() => {
-                                    setModalOpen(true);}}>
+                                    setModalOpen(true);
+                                }}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
                                             <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
@@ -126,7 +128,14 @@ const HomePageLayout = () => {
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
                                         <div className={styles.options}>
-                                            <Menu cid={file.cid} id={file._id} isFavorite={file.isFavorite}/>
+                                            <Menu cid={file.cid}
+                                                  id={file._id}
+                                                  isFavorite={file.isFavorite}
+                                                  downloadMenu={true}
+                                                  shareMenu={true}
+                                                  deleteMenu={true}
+                                                  favoriteMenu={true}
+                                            />
                                         </div>
                                     </div>
                                 </button>
