@@ -1,7 +1,8 @@
 import React from "react";
 import "./preview.css";
+import Menu from "@/components/Menu/Menu";
 
-function Modal({ setOpenModal }) {
+function Modal({ setOpenModal, file }) {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
@@ -16,17 +17,23 @@ function Modal({ setOpenModal }) {
                             X
                         </button>
                     </div>
-                    <img src="test.jpg" alt="Profile Photo" />
+                    <img src={file.url} alt="Preview" />
                 </div>
                 <div className="imgDetails">
                     <div className="imgInfo">
-                        <p>IMG_1000</p>
-                        <p className="date">June 16, 2023</p>
+                        <p>{file.name}</p>
+                        {/*<p className="date">June 16, 2023</p>*/}
+                        <p className="date">{file.createdAt}</p>
                     </div>
                         <div className="options">
-                            <img src="mycloud/share.png" alt="share" />
-                            <img src="mycloud/delete.png" alt="delete" />
-                            <img src="mycloud/options.png" alt="options" />
+                            <Menu cid={file.cid}
+                                  id={file._id}
+                                  isFavorite={file.isFavorite}
+                                  downloadMenu={true}
+                                  shareMenu={true}
+                                  deleteMenu={true}
+                                  favoriteMenu={true}
+                            />
                         </div>
                 </div>
             </div>

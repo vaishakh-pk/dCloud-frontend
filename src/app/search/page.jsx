@@ -42,7 +42,7 @@ const SharedFilesLayout = () => {
 
                     <div className={styles.sharedfiles}>
                         {data?.files?.length > 0
-                            ? <p className={styles.sharedfilesfont}>Your shared files</p>
+                            ? <p className={styles.sharedfilesfont}>Search results</p>
                             : <p className={styles.sharedfilesfont}>No files found</p> }
                     </div>
 

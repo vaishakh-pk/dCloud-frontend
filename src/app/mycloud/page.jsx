@@ -14,6 +14,7 @@ const HomePageLayout = () => {
 
     const [data, setData] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const [file, setFile] = useState(null);
 
 
     useEffect(() => {
@@ -34,12 +35,16 @@ const HomePageLayout = () => {
             })
     }, [])
 
+    const handleFileClick = (file) => {
+        setFile(file);
+        setModalOpen(true);
+    }
 
     return (
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
-                {/*{modalOpen && <Modal setOpenModal={setModalOpen} />}*/}
+                {modalOpen && <Modal file={file} setOpenModal={setModalOpen} />}
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}onClick={() => router.push("/search")} >
                         <input className={styles['search-input']} placeholder="Search" disabled={true}/>
@@ -86,16 +91,14 @@ const HomePageLayout = () => {
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files?.map((file, index) => (
                             <div key={index} title={file.name}>
-                                <button className={styles.longbutton} onClick={() => {
-                                    setModalOpen(true);
-                                }}>
+                                <button className={styles.longbutton} onClick={() => handleFileClick(file)}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
                                             <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
                                         </div>
                                         <div className={styles['longbutton-filename']}>{file.name.slice(0, 20)}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
-                                        <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.size.toFixed(3)}MB</div>
                                         <div className={styles.options}>
                                             <Menu cid={file.cid}
                                                   id={file._id}
@@ -134,40 +137,7 @@ const HomePageLayout = () => {
                                     <p className={styles.stor} style={{fontWeight: 'normal'}}>
                                         {data?.storageInGB?.toFixed(2)} GB Used
                                     </p>
-                                    <progress value="60" max="100"></progress>
                                 </div>
-                            </div>
-                            <div className={styles.rectanglestorage}>
-                                <div className={styles['stor-flex-container']}>
-                                    <p className={styles.stor}>Your shared folders</p>
-                                </div>
-                                <button className={styles.sharedbutton}>
-                                    <div className={styles['sharedbutton-elements']}>
-                                        <div className={styles['sharedbutton-filename']}>Keynote files</div>
-                                        <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user"/>
-                                            <img src="avatar.png" alt="user"/>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button className={`${styles.sharedbutton} ${styles['sharedbutton-colored']}`}>
-                                    <div className={styles['sharedbutton-elements']}>
-                                        <div className={styles['sharedbutton-filename']}>Vacation photos</div>
-                                        <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user"/>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button className={`${styles.sharedbutton} ${styles['sharedbutton-colored2']}`}>
-                                    <div className={styles['sharedbutton-elements']}>
-                                        <div className={styles['sharedbutton-filename']}>Project report</div>
-                                        <div className={styles.sharedoptions}>
-                                            <img src="avatar.png" alt="user"/>
-                                            <img src="mycloud/avatar.png" alt="user"/>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button className={styles.addmore}>+ Add more</button>
                             </div>
                         </div>
                     </div>
