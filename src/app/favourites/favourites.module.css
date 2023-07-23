@@ -159,6 +159,7 @@
     border: none;
     background-color: #ffffff;
     margin-right: 10px;
+    margin-bottom: 10px;
     border-radius: 10px;
 
 }
@@ -177,4 +178,196 @@
 .filename {
     display: inline-block;
     font-weight: bold;
+}
+
+
+.filecategories {
+    color: #2a3471;
+    font-weight: bold;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+.pic {
+    padding: 10px;
+    margin-right: 5px;
+    font-size: 16px;
+    background-color: #0473c2;
+    color: white;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+.pic img {
+    width:25px;
+    height:25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+.doc {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #d30c9b;
+    color: white;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+.doc img {
+    width:25px;
+    height:25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+.vid {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #09a185;
+    color: white;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+.vid img {
+    width:25px;
+    height:25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+.aud {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+    background-color: #4d0dd7;
+    color: white;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+.aud img {
+    width:25px;
+    height:25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+
+.other {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+    color: white;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+    background-color: #cf365a;
+}
+
+.other img {
+    width:25px;
+    height:25px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+
+.other:hover {
+    background-color: #be1d42; /* Set the background color on hover */
+    color: #ffffff; /* Set
+}
+
+
+
+.pic:hover {
+  background-color: #045791; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+}
+.pic:hover {
+    background-color: #045791; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+}
+.doc:hover {
+    background-color: #890965; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+}
+.vid:hover {
+    background-color: #08806a; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+}
+.aud:hover {
+    background-color: #3b0aa5; /* Set the background color on hover */
+    color: #ffffff; /* Set the text color on hover */
+}
+.filecategories-text-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-top: 5px;
+    margin:0;
+}
+.filecategories-text-number {
+    font-size: 13px;
+    font-weight: lighter;
+    color: #ffffff;
+    margin:0;
+    padding-top: 2px;
+}
+
+.filedivision {
+    color: #2a3471;
+    font-weight: bold;
+    padding: 10px;
+    padding-top: 20px;
+}
+.filesbutton {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #141d58;
+    width: 18%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    text-align: left;
+}
+.filesbutton img {
+    width:20px;
+    height:20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding:1px;
+}
+.filedivision-text-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1d297c;
+    padding-top: 1px;
+    margin: 0;
+}
+.filedivision-text-number {
+    font-size: 13px;
+    font-weight: lighter;
+    color: #1d297c;
+    margin:0;
+    padding-top: 2px;
+}
+.filesbutton:hover {
+    background-color: #9995a1;
+    color: #141d58;
 }

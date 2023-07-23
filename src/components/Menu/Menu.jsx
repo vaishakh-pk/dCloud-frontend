@@ -17,8 +17,11 @@ import GradeIcon from '@mui/icons-material/Grade';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
+import { useRouter } from 'next/navigation';
 
 export default function AccountMenu({cid, id, isFavorite}) {
+
+    const router = useRouter()
 
     const [favorite, setFavorite] = React.useState(isFavorite);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -47,6 +50,26 @@ export default function AccountMenu({cid, id, isFavorite}) {
                 if(data.success) {
                     toast.success(data.message)
                     setFavorite(!favorite)
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
+    }
+
+    const onDeleteClick = () => {
+        fetch(`${baseUrl}api/file/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    toast.success(data.message)
+                    window.location.reload()
                 }
             })
             .catch((err) => {
@@ -118,7 +141,7 @@ export default function AccountMenu({cid, id, isFavorite}) {
                     </ListItemIcon>
                     {favorite ? 'Remove from Favorite' : 'Add to Favorite'}
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={onDeleteClick}>
                     <ListItemIcon>
                         <DeleteIcon/>
                     </ListItemIcon>
