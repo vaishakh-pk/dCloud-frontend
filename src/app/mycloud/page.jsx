@@ -33,11 +33,6 @@ const HomePageLayout = () => {
             })
     }, [])
 
-    const onDownloadClick = (cid) => {
-        const url = `${baseUrl}api/file/download/${cid}/`;
-        window.open(url, '_blank');
-    };
-
 
     return (
         <Fragment>
@@ -120,6 +115,7 @@ const HomePageLayout = () => {
                     <div className={styles.recentfiles}>
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files.map((file, index) => (
+
                             <div>
                                 <button className={styles.longbutton} onClick={() => {
                                     setModalOpen(true);}}>
@@ -131,10 +127,7 @@ const HomePageLayout = () => {
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
                                         <div className={styles.options}>
-                                            <Menu cid={file.cid}/>
-                                            {/*<img onClick={() => onDownloadClick(file.cid)} style={{cursor: "pointer"}}*/}
-                                            {/*     src="mycloud/download.png" alt="share"/>*/}
-                                            {/*<img src="mycloud/options.png" alt="options"/>*/}
+                                            <Menu cid={file.cid} id={file._id} isFavorite={file.isFavorite}/>
                                         </div>
                                     </div>
                                 </button>

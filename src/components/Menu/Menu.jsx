@@ -16,8 +16,11 @@ import DownloadIcon from '@mui/icons-material/Download';
 import GradeIcon from '@mui/icons-material/Grade';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {baseUrl} from "@/app/api/api";
+import {toast} from "react-hot-toast";
 
-export default function AccountMenu({cid}) {
+export default function AccountMenu({cid, id, isFavorite}) {
+
+    const [favorite, setFavorite] = React.useState(isFavorite);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -30,6 +33,26 @@ export default function AccountMenu({cid}) {
     const onDownloadClick = () => {
         const url = `${baseUrl}api/file/download/${cid}/`;
         window.open(url, '_blank');
+    }
+
+    const onFavotireClick = () => {
+        fetch(`${baseUrl}api/file/addtofavorite/${id}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    toast.success(data.message)
+                    setFavorite(!favorite)
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
     }
 
     return (
@@ -89,11 +112,11 @@ export default function AccountMenu({cid}) {
                     </ListItemIcon>
                     Download
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={onFavotireClick}>
                     <ListItemIcon>
                         <GradeIcon/>
                     </ListItemIcon>
-                        Add to favorites
+                    {favorite ? 'Remove from Favorite' : 'Add to Favorite'}
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
