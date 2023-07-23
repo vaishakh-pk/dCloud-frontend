@@ -18,6 +18,10 @@ function UploadPageLayout() {
     const [files, setFiles] = useState([])
 
     const handleFileChange = (e) => {
+        if(e.target.files[0].size > 1000000000) {
+            toast.error("Please upload file less than 1GB")
+            return;
+        }
         setFiles([...files, e.target.files])
     }
 
@@ -54,8 +58,6 @@ function UploadPageLayout() {
             }
         }
     }, [files]);
-
-
 
     const onCrossClick = (index) => {
         const newData = files.filter((file, i) => i !== index);
