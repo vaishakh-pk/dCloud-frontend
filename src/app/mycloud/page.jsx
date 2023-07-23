@@ -115,8 +115,7 @@ const HomePageLayout = () => {
                     <div className={styles.recentfiles}>
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files.map((file, index) => (
-
-                            <div>
+                            <div key={index}>
                                 <button className={styles.longbutton} onClick={() => {
                                     setModalOpen(true);}}>
                                     <div className={styles['longbutton-elements']}>

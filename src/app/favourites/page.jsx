@@ -18,8 +18,8 @@ function FavoritesLayout() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                setData(data)
+                if (data.success)
+                    setData(data)
             })
             .catch((err) => {
                 console.error(err);
@@ -79,8 +79,8 @@ function FavoritesLayout() {
                     <div className={styles.files}>
                         <p className={styles['files-font']}>Files</p>
                         {data?.files?.map((file, index) => (
-                            <button className={styles['files-buttons']}>
-                                <img src="picture.png" alt="Profile Photo"/>
+                            <button key={index} className={styles['files-buttons']}>
+                                <img src={file.url} alt="Profile Photo"/>
                                 <p className={styles.filename}>{file.name.slice(0, 15)}...</p>
                             </button>
                         ))}

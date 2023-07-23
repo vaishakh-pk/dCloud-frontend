@@ -1,8 +1,34 @@
-import React, {Fragment} from 'react';
+"use client"
+import React, {Fragment, useState, useEffect} from 'react';
 import styles from './pictures.module.css';
 import Navbar from "@/components/Navbar/Navbar";
+import {baseUrl} from "@/app/api/api";
+import {toast} from "react-hot-toast";
 
 function FavoritesLayout() {
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch(`${baseUrl}api/files`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success)
+                    setData(data.images.files)
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error(err)
+            })
+    }, [])
+
+
+
     return (
         <Fragment>
             <Navbar/>
@@ -25,59 +51,14 @@ function FavoritesLayout() {
 
                     <div className={styles.files}>
                         <p className={styles['files-font']}>Files</p>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
+                        {data?.map((file, index) => (
+                            <button key={index} className={styles['files-buttons']}>
+                                <img src={file.url} alt="Profile Photo" />
+                                <p className={styles.filename}>{file.name.slice(0, 15)}...</p>
+                            </button>
+                        ))}
                     </div>
 
-                    <div className={styles.files}>
-                        <p className={styles['files-font']}></p>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                        <button className={styles['files-buttons']}>
-                            <img src="/mycloud/picture.png" alt="Profile Photo" />
-                            <p className={styles.filename}>file_0001</p>
-                        </button>
-                    </div>
                 </div>
             </div>
         </Fragment>
