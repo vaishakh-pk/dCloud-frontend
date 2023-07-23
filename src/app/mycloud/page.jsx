@@ -40,9 +40,9 @@ const HomePageLayout = () => {
             <Navbar/>
             <div className={styles.container}>
                 {/*{modalOpen && <Modal setOpenModal={setModalOpen} />}*/}
-                <div className={styles['main-content']} onClick={() => router.push("/search")}>
-                    <div className={styles['search-bar']}>
-                        <input  className={styles['search-input']} placeholder="Search"/>
+                <div className={styles['main-content']}>
+                    <div className={styles['search-bar']}onClick={() => router.push("/search")} >
+                        <input className={styles['search-input']} placeholder="Search" disabled={true}/>
                     </div>
                     <div className={styles.filecategories}>
                         <p>Categories</p>

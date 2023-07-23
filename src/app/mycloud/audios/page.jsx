@@ -35,12 +35,12 @@ function FavoritesLayout() {
             <div className={styles.container}>
                 <div className={styles['main-content']}>
                     {/* Main content in the middle */}
-                    <div className={styles['search-bar']}>
-                        <input type="text" className={styles['search-input']} placeholder="Search" />
+                    <div className={styles['search-bar']}onClick={() => router.push("/search")} >
+                        <input className={styles['search-input']} placeholder="Search" disabled={true}/>
                     </div>
 
-                    <div className={styles.favorites}>
-                        <button className={styles['favorites-button']}>
+                    <div className={styles.favorites} style={{paddingTop: "20px"}}>
+                        <button className={styles['favorites-button']} >
                             <img src="/mycloud/audio.png" alt="Button Image" />
                             <div className={styles['favorites-button-text']}>
                                 <p className={styles['favorites-button-text-name']}>Audio</p>

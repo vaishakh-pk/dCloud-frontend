@@ -33,8 +33,8 @@ const SharedFilesLayout = () => {
             <Navbar/>
             <div className={styles.container}>
                 <div className={styles['main-content']}>
-                    <div className={styles['search-bar']}>
-                        <input type="text" className={styles['search-input']} placeholder="Search"/>
+                    <div className={styles['search-bar']}onClick={() => router.push("/search")} >
+                        <input className={styles['search-input']} placeholder="Search" disabled={true}/>
                     </div>
 
                     <div className={styles.sharedfiles}>
