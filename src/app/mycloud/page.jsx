@@ -6,6 +6,7 @@ import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import Modal from "@/components/Preview/preview";
+import Menu from "@/components/Menu/Menu";
 
 const HomePageLayout = () => {
 
@@ -42,7 +43,7 @@ const HomePageLayout = () => {
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
-                {modalOpen && <Modal setOpenModal={setModalOpen} />}
+                {/*{modalOpen && <Modal setOpenModal={setModalOpen} />}*/}
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}>
                         <input type="text" className={styles['search-input']} placeholder="Search"/>
@@ -130,9 +131,10 @@ const HomePageLayout = () => {
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
                                         <div className={styles.options}>
-                                            <img onClick={() => onDownloadClick(file.cid)} style={{cursor: "pointer"}}
-                                                 src="mycloud/download.png" alt="share"/>
-                                            <img src="mycloud/options.png" alt="options"/>
+                                            <Menu cid={file.cid}/>
+                                            {/*<img onClick={() => onDownloadClick(file.cid)} style={{cursor: "pointer"}}*/}
+                                            {/*     src="mycloud/download.png" alt="share"/>*/}
+                                            {/*<img src="mycloud/options.png" alt="options"/>*/}
                                         </div>
                                     </div>
                                 </button>
