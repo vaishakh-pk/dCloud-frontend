@@ -9,9 +9,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DownloadIcon from '@mui/icons-material/Download';
 import GradeIcon from '@mui/icons-material/Grade';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ShareIcon from '@mui/icons-material/Share';
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
+import Modal from "@/components/Modal/Modal";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
 
 export default function AccountMenu({cid, id, isFavorite}) {
 
@@ -19,6 +24,8 @@ export default function AccountMenu({cid, id, isFavorite}) {
 
     const [favorite, setFavorite] = React.useState(isFavorite);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [shareEmail, setShareEmail] = React.useState("");
+    const [openModal, setOpenModal] = React.useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -41,7 +48,7 @@ export default function AccountMenu({cid, id, isFavorite}) {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.success) {
+                if (data.success) {
                     toast.success(data.message)
                     setFavorite(!favorite)
                 }
@@ -61,7 +68,7 @@ export default function AccountMenu({cid, id, isFavorite}) {
         })
             .then(res => res.json())
             .then(data => {
-                if(data.success) {
+                if (data.success) {
                     toast.success(data.message)
                     window.location.reload()
                 }
@@ -72,19 +79,76 @@ export default function AccountMenu({cid, id, isFavorite}) {
             })
     }
 
+    const onShareClick = () => {
+        setOpenModal(true)
+    }
+
+    const confirmShare = () => {
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+        if(!emailRegex.test(shareEmail)) {
+            toast.error("Invalid email")
+            return;
+        }else {
+            console.log(shareEmail)
+            fetch(`${baseUrl}api/file/share/${id}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({shareEmail: shareEmail})
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.success) {
+                        toast.success(`File shared with ${shareEmail}`)
+                        setShareEmail("")
+                        setOpenModal(false)
+                    }else {
+                        toast.error(data.message)
+                    }
+
+                })
+                .catch((err) => {
+                    console.error(err);
+                    toast.error(err)
+                })
+        }
+    }
+
+
     return (
         <React.Fragment>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                        padding: 1
+                    }}
+                >
+                    <TextField value={shareEmail}
+                               type={"email"}
+                               onChange={(e) => setShareEmail(e.target.value) }
+                               fullWidth label="Enter the email"
+                               id="fullWidth"/>
+                    <Button onClick={confirmShare}>Share</Button>
+
+                </Box>
+            </Modal>
+            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                 <Tooltip title="More options">
                     <IconButton
                         onClick={handleClick}
                         size="small"
-                        sx={{ ml: 2 }}
+                        sx={{ml: 2}}
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <MoreVertIcon />
+                        <MoreVertIcon/>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -120,12 +184,12 @@ export default function AccountMenu({cid, id, isFavorite}) {
                         },
                     },
                 }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem onClick={onDownloadClick}>
                     <ListItemIcon>
-                        <DownloadIcon  />
+                        <DownloadIcon/>
                     </ListItemIcon>
                     Download
                 </MenuItem>
@@ -135,11 +199,17 @@ export default function AccountMenu({cid, id, isFavorite}) {
                     </ListItemIcon>
                     {favorite ? 'Remove from Favorite' : 'Add to Favorite'}
                 </MenuItem>
+                <MenuItem onClick={onShareClick}>
+                    <ListItemIcon>
+                        <ShareIcon/>
+                    </ListItemIcon>
+                    Share
+                </MenuItem>
                 <MenuItem onClick={onDeleteClick}>
                     <ListItemIcon>
                         <DeleteIcon/>
                     </ListItemIcon>
-                        Delete
+                    Delete
                 </MenuItem>
             </Menu>
         </React.Fragment>
