@@ -4,6 +4,7 @@ import styles from './favourites.module.css';
 import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
+import Menu from "@/components/Menu/Menu";
 
 function FavoritesLayout() {
 
@@ -79,9 +80,13 @@ function FavoritesLayout() {
                     <div className={styles.files}>
                         <p className={styles['files-font']}>Files</p>
                         {data?.files?.map((file, index) => (
-                            <button key={index} className={styles['files-buttons']}>
+                            <button key={index} className={styles['files-buttons']} title={file.name}>
                                 <img src={file.url} alt="Profile Photo"/>
-                                <p className={styles.filename}>{file.name.slice(0, 15)}...</p>
+                                <div style={{display: "flex"}}>
+                                    <p className={styles.filename}>{file.name.slice(0, 13)}... </p>
+                                    <Menu cid={file.cid} id={file._id} isFavorite={file.isFavorite}/>
+                                </div>
+
                             </button>
                         ))}
                     </div>

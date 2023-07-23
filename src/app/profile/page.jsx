@@ -115,7 +115,7 @@ const Page = () => {
         <Fragment>
             <div className={styles['left-side']}>
                 <div className={styles['profile-photo']}>
-                    <img src={user?.avatar.url ? user?.avatar.url : "/avatar.png"} alt="Profile Photo"/>
+                    <img src={user?.avatar?.url ? user?.avatar.url : "/avatar.png"} alt="Profile Photo"/>
                 </div>
                 <div>
                     <button onClick={() => router.push('/mycloud')} className={`${styles.button1} ${styles.home}`}>My
@@ -147,7 +147,7 @@ const Page = () => {
                         <h2>My Profile</h2>
                         <div className={styles.profileDetails}>
                             <div className={styles.profileDetailsLeft}>
-                                <img src={user?.avatar.url} alt={user?.name}/>
+                                <img src={user?.avatar?.url} alt={user?.name}/>
                                 <button onClick={onEditClick}>Edit Profile</button>
                             </div>
                             <div className={styles.profileDetailsRight}>

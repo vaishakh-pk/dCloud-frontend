@@ -45,35 +45,35 @@ const HomePageLayout = () => {
                     </div>
                     <div className={styles.filecategories}>
                         <p>Categories</p>
-                        <button className={styles.pic}>
+                        <button className={styles.pic} onClick={() => router.push("/mycloud/pictures")}>
                             <img src="mycloud/camera.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Pictures</p>
                                 <p className={styles['filecategories-text-number']}>{data?.count?.image} files</p>
                             </div>
                         </button>
-                        <button className={styles.doc}>
+                        <button className={styles.doc} onClick={() => router.push("/mycloud/documents")}>
                             <img src="mycloud/documents.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Documents</p>
                                 <p className={styles['filecategories-text-number']}>{data?.count?.document} files</p>
                             </div>
                         </button>
-                        <button className={styles.vid}>
+                        <button className={styles.vid} onClick={() => router.push("/mycloud/videos")}>
                             <img src="mycloud/video.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Videos</p>
                                 <p className={styles['filecategories-text-number']}>{data?.count?.video} files</p>
                             </div>
                         </button>
-                        <button className={`${styles.aud}`}>
+                        <button className={`${styles.aud}`} onClick={() => router.push("/mycloud/audios")}>
                             <img src="mycloud/audio.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Audio</p>
                                 <p className={styles['filecategories-text-number']}>{data?.count?.audio} files</p>
                             </div>
                         </button>
-                        <button className={`${styles.other}`}>
+                        <button className={`${styles.other}`} onClick={() => router.push("/mycloud/others")}>
                             <img src="mycloud/others.png" alt="Button Image"/>
                             <div className={styles['filecategories-text']}>
                                 <p className={styles['filecategories-text-name']}>Others</p>
@@ -114,8 +114,8 @@ const HomePageLayout = () => {
                     {/*</div>*/}
                     <div className={styles.recentfiles}>
                         <p className={styles.recentflcapt}>Recent files</p>
-                        {data?.files.map((file, index) => (
-                            <div key={index}>
+                        {data?.files?.map((file, index) => (
+                            <div key={index} title={file.name}>
                                 <button className={styles.longbutton} onClick={() => {
                                     setModalOpen(true);}}>
                                     <div className={styles['longbutton-elements']}>
@@ -154,7 +154,7 @@ const HomePageLayout = () => {
                                 </div>
                                 <div className={styles['storage-meter']}>
                                     <p className={styles.stor} style={{fontWeight: 'normal'}}>
-                                        {data?.storageInGB.toFixed(2)} GB Used
+                                        {data?.storageInGB?.toFixed(2)} GB Used
                                     </p>
                                     <progress value="60" max="100"></progress>
                                 </div>

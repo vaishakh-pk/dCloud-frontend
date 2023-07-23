@@ -1,6 +1,6 @@
 "use client"
 import React, {Fragment, useState, useEffect} from 'react';
-import styles from './pictures.module.css';
+import styles from './documents.module.css';
 import Navbar from "@/components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
