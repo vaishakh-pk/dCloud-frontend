@@ -40,9 +40,9 @@ const HomePageLayout = () => {
             <Navbar/>
             <div className={styles.container}>
                 {/*{modalOpen && <Modal setOpenModal={setModalOpen} />}*/}
-                <div className={styles['main-content']}>
+                <div className={styles['main-content']} onClick={() => router.push("/search")}>
                     <div className={styles['search-bar']}>
-                        <input type="text" className={styles['search-input']} placeholder="Search"/>
+                        <input  className={styles['search-input']} placeholder="Search"/>
                     </div>
                     <div className={styles.filecategories}>
                         <p>Categories</p>
@@ -82,37 +82,6 @@ const HomePageLayout = () => {
                             </div>
                         </button>
                     </div>
-                    {/*<div className={styles.filedivision}>*/}
-                    {/*    <p>Files</p>*/}
-                    {/*    <button className={styles.filesbutton}>*/}
-                    {/*        <img src="mycloud/work.png" alt="Button Image"/>*/}
-                    {/*        <div className={styles['filedivision-text']}>*/}
-                    {/*            <p className={styles['filedivision-text-name']}>Work</p>*/}
-                    {/*            <p className={styles['filedivision-text-number']}>100 files</p>*/}
-                    {/*        </div>*/}
-                    {/*    </button>*/}
-                    {/*    <button className={styles.filesbutton}>*/}
-                    {/*        <img src="mycloud/person.png" alt="Button Image"/>*/}
-                    {/*        <div className={styles['filedivision-text']}>*/}
-                    {/*            <p className={styles['filedivision-text-name']}>Personal</p>*/}
-                    {/*            <p className={styles['filedivision-text-number']}>540 files</p>*/}
-                    {/*        </div>*/}
-                    {/*    </button>*/}
-                    {/*    <button className={styles.filesbutton}>*/}
-                    {/*        <img src="mycloud/school.png" alt="Button Image"/>*/}
-                    {/*        <div className={styles['filedivision-text']}>*/}
-                    {/*            <p className={styles['filedivision-text-name']}>School</p>*/}
-                    {/*            <p className={styles['filedivision-text-number']}>92 files</p>*/}
-                    {/*        </div>*/}
-                    {/*    </button>*/}
-                    {/*    <button className={styles.filesbutton}>*/}
-                    {/*        <img src="mycloud/archive.png" alt="Button Image"/>*/}
-                    {/*        <div className={styles['filedivision-text']}>*/}
-                    {/*            <p className={styles['filedivision-text-name']}>Archive</p>*/}
-                    {/*            <p className={styles['filedivision-text-number']}>113 files</p>*/}
-                    {/*        </div>*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
                     <div className={styles.recentfiles}>
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files?.map((file, index) => (

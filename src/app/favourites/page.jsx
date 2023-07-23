@@ -78,13 +78,22 @@ function FavoritesLayout() {
                     </div>
 
                     <div className={styles.files}>
-                        <p className={styles['files-font']}>Files</p>
+                        {data?.files?.length > 0
+                            ? <p className={styles.sharedfilesfont}>Files</p>
+                            : <p className={styles.sharedfilesfont}>No files found</p> }
                         {data?.files?.map((file, index) => (
                             <button key={index} className={styles['files-buttons']} title={file.name}>
                                 <img src={file.url} alt="Profile Photo"/>
                                 <div style={{display: "flex"}}>
                                     <p className={styles.filename}>{file.name.slice(0, 13)}... </p>
-                                    <Menu cid={file.cid} id={file._id} isFavorite={file.isFavorite}/>
+                                    <Menu cid={file.cid}
+                                          id={file._id}
+                                          isFavorite={file.isFavorite}
+                                          downloadMenu={true}
+                                          shareMenu={true}
+                                          deleteMenu={true}
+                                          favoriteMenu={true}
+                                    />
                                 </div>
 
                             </button>

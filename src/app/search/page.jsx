@@ -1,6 +1,6 @@
 "use client"
 import React, {Fragment, useState, useEffect} from 'react';
-import styles from './sharedfiles.module.css';
+import styles from './search.module.css';
 import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
@@ -8,10 +8,11 @@ import Menu from "@/components/Menu/Menu";
 
 const SharedFilesLayout = () => {
 
+    const [searchQuery, setSearchQuery] = useState("");
     const [data, setData] = useState();
 
     useEffect(() => {
-        fetch(`${baseUrl}api/files/shared`, {
+        fetch(`${baseUrl}api/files/search?keyword=${searchQuery}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -26,7 +27,7 @@ const SharedFilesLayout = () => {
                 console.error(err);
                 toast.error(err)
             })
-    }, [])
+    }, [searchQuery])
 
     return (
         <Fragment>
@@ -34,13 +35,15 @@ const SharedFilesLayout = () => {
             <div className={styles.container}>
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}>
-                        <input type="text" className={styles['search-input']} placeholder="Search"/>
+                        <input  type="text" className={styles['search-input']} placeholder="Search"
+                                value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+                        />
                     </div>
 
                     <div className={styles.sharedfiles}>
                         {data?.files?.length > 0
                             ? <p className={styles.sharedfilesfont}>Your shared files</p>
-                            : <p className={styles.sharedfilesfont}>No shared files found</p> }
+                            : <p className={styles.sharedfilesfont}>No files found</p> }
                     </div>
 
                     <div className={styles.recentfiles}>
@@ -59,7 +62,9 @@ const SharedFilesLayout = () => {
                                                   id={file._id}
                                                   isFavorite={file.isFavorite}
                                                   downloadMenu={true}
-                                                  removeShareMenu={true}
+                                                  shareMenu={true}
+                                                  deleteMenu={true}
+                                                  favoriteMenu={true}
                                             />
                                         </div>
                                     </div>
