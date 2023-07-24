@@ -4,10 +4,18 @@ import styles from './others.module.css';
 import Navbar from "@/components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
+import Modal from "@/components/Preview/preview";
+import Menu from "@/components/Menu/Menu";
 
 function FavoritesLayout() {
 
     const [data, setData] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [file, setFile] = useState(null);
+    const handleFileClick = (file) => {
+        setFile(file);
+        setModalOpen(true);
+    }
 
     useEffect(() => {
         fetch(`${baseUrl}api/files`, {
@@ -33,6 +41,7 @@ function FavoritesLayout() {
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
+                {modalOpen && <Modal file={file} setOpenModal={setModalOpen} />}
                 <div className={styles['main-content']}>
                     {/* Main content in the middle */}
                     <div className={styles['search-bar']}onClick={() => router.push("/search")} >
@@ -52,9 +61,20 @@ function FavoritesLayout() {
                     <div className={styles.files}>
                         <p className={styles['files-font']}>Files</p>
                         {data?.files.map((file, index) => (
-                            <button key={index} className={styles['files-buttons']}>
-                                <img src={"/mycloud/others.png"} alt="Profile Photo" />
-                                <p className={styles.filename}>{file.name.slice(0, 15)}...</p>
+                            <button key={index} className={styles['files-buttons']} title={file.name}>
+                                <img src={"/mycloud/other.png"} alt="Profile Photo" style={{cursor: "pointer"}}
+                                     onClick={() => handleFileClick(file)}/>
+                                <div style={{display: "flex"}}>
+                                    <p className={styles.filename}>{file.name.slice(0, 13)}... </p>
+                                    <Menu cid={file.cid}
+                                          id={file._id}
+                                          isFavorite={file.isFavorite}
+                                          downloadMenu={true}
+                                          shareMenu={true}
+                                          deleteMenu={true}
+                                          favoriteMenu={true}
+                                    />
+                                </div>
                             </button>
                         ))}
                     </div>

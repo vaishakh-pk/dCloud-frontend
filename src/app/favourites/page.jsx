@@ -12,6 +12,10 @@ function FavoritesLayout() {
     const [data, setData] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [file, setFile] = useState(null);
+    const handleFileClick = (file) => {
+        setFile(file);
+        setModalOpen(true);
+    }
 
     useEffect(() => {
         fetch(`${baseUrl}api/files/favorites`, {
@@ -30,11 +34,6 @@ function FavoritesLayout() {
                 toast.error(err)
             })
     }, [])
-
-    const handleFileClick = (file) => {
-        setFile(file);
-        setModalOpen(true);
-    }
 
     return (
         <Fragment>
