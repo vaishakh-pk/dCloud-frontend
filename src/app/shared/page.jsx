@@ -5,10 +5,17 @@ import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
 import Menu from "@/components/Menu/Menu";
+import Modal from "@/components/Preview/preview";
 
 const SharedFilesLayout = () => {
 
     const [data, setData] = useState();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [file, setFile] = useState(null);
+    const handleFileClick = (file) => {
+        setFile(file);
+        setModalOpen(true);
+    }
 
     useEffect(() => {
         fetch(`${baseUrl}api/files/shared`, {
@@ -32,6 +39,7 @@ const SharedFilesLayout = () => {
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
+                {modalOpen && <Modal file={file} setOpenModal={setModalOpen} />}
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}onClick={() => router.push("/search")} >
                         <input className={styles['search-input']} placeholder="Search" disabled={true}/>
@@ -49,11 +57,15 @@ const SharedFilesLayout = () => {
                                 <button className={styles.longbutton}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
-                                            <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
+                                            {file.type === "image" && <img src="mycloud/camerawhite.png" alt="image"/>}
+                                            {file.type === "video" && <img src="mycloud/videowhite.png" alt="image"/>}
+                                            {file.type === "document" && <img src="mycloud/documentswhite.png" alt="image"/>}
+                                            {file.type === "audio" && <img src="mycloud/audiowhite.png" alt="image"/>}
+                                            {file.type === "other" && <img src="mycloud/others.png" alt="image"/>}
                                         </div>
-                                        <div className={styles['longbutton-filename']}>{file.name.slice(0, 20)}</div>
+                                        <div className={styles['longbutton-filename']} onClick={() => handleFileClick(file)}>{file.name.slice(0, 20)}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
-                                        <div className={styles['longbutton-fileformat']}>{file.size}MB</div>
+                                        <div className={styles['longbutton-fileformat']}>{file.size.toFixed(3)}MB</div>
                                         <div className={styles.options}>
                                             <Menu cid={file.cid}
                                                   id={file._id}

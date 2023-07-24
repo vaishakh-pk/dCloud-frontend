@@ -141,10 +141,9 @@ export default function AccountMenu({
                 console.log(data)
                 if (data.success) {
                     toast.success("Removed from favorites")
-
+                    window.location.reload()
                 } else {
                     toast.error(data.message)
-                    window.location.reload()
                 }
             })
             .catch((err) => {
