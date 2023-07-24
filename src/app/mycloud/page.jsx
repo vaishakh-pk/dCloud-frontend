@@ -94,7 +94,11 @@ const HomePageLayout = () => {
                                 <button className={styles.longbutton}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
-                                            <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
+                                            {file.type === "image" && <img src="mycloud/camerawhite.png" alt="image"/>}
+                                            {file.type === "video" && <img src="mycloud/videowhite.png" alt="image"/>}
+                                            {file.type === "document" && <img src="mycloud/documentswhite.png" alt="image"/>}
+                                            {file.type === "audio" && <img src="mycloud/audiowhite.png" alt="image"/>}
+                                            {file.type === "other" && <img src="mycloud/others.png" alt="image"/>}
                                         </div>
                                         <div className={styles['longbutton-filename']} onClick={() => handleFileClick(file)}>{file.name.slice(0, 20)}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>

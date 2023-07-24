@@ -5,10 +5,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import {baseUrl} from "@/app/api/api";
 import {toast} from "react-hot-toast";
 import Menu from "@/components/Menu/Menu";
+import Modal from "@/components/Preview/preview";
 
 function FavoritesLayout() {
 
     const [data, setData] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [file, setFile] = useState(null);
 
     useEffect(() => {
         fetch(`${baseUrl}api/files/favorites`, {
@@ -28,11 +31,16 @@ function FavoritesLayout() {
             })
     }, [])
 
+    const handleFileClick = (file) => {
+        setFile(file);
+        setModalOpen(true);
+    }
 
     return (
         <Fragment>
             <Navbar/>
             <div className={styles.container}>
+                {modalOpen && <Modal file={file} setOpenModal={setModalOpen} />}
                 <div className={styles['main-content']}>
                     <div className={styles['search-bar']}onClick={() => router.push("/search")} >
                         <input className={styles['search-input']} placeholder="Search" disabled={true}/>
@@ -83,7 +91,16 @@ function FavoritesLayout() {
                             : <p className={styles.sharedfilesfont}>No files found</p> }
                         {data?.files?.map((file, index) => (
                             <button key={index} className={styles['files-buttons']} title={file.name}>
-                                <img src={file.url} alt="Profile Photo"/>
+                                {file.type === "image" && <img src={file.url} alt="Profile Photo" style={{cursor: "pointer"}}
+                                      onClick={() => handleFileClick(file)}/>}
+                                {file.type === "video" && <img src="mycloud/video.png" alt="Profile Photo" style={{cursor: "pointer"}}
+                                        onClick={() => handleFileClick(file)}/>}
+                                {file.type === "audio" && <img src="mycloud/audio.png" alt="Profile Photo" style={{cursor: "pointer"}}
+                                        onClick={() => handleFileClick(file)}/>}
+                                {file.type === "document" && <img src="mycloud/documents.png" alt="Profile Photo" style={{cursor: "pointer"}}
+                                        onClick={() => handleFileClick(file)}/>}
+                                {file.type === "other" && <img src="mycloud/others.png" alt="Profile Photo" style={{cursor: "pointer"}}
+                                        onClick={() => handleFileClick(file)}/>}
                                 <div style={{display: "flex"}}>
                                     <p className={styles.filename}>{file.name.slice(0, 13)}... </p>
                                     <Menu cid={file.cid}
