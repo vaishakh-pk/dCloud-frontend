@@ -91,12 +91,12 @@ const HomePageLayout = () => {
                         <p className={styles.recentflcapt}>Recent files</p>
                         {data?.files?.map((file, index) => (
                             <div key={index} title={file.name}>
-                                <button className={styles.longbutton} onClick={() => handleFileClick(file)}>
+                                <button className={styles.longbutton}>
                                     <div className={styles['longbutton-elements']}>
                                         <div className={styles['longbutton-icon']}>
                                             <img src="mycloud/camerawhite.png" alt="Profile Photo"/>
                                         </div>
-                                        <div className={styles['longbutton-filename']}>{file.name.slice(0, 20)}</div>
+                                        <div className={styles['longbutton-filename']} onClick={() => handleFileClick(file)}>{file.name.slice(0, 20)}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.type}</div>
                                         <div className={styles['longbutton-fileformat']}>{file.size.toFixed(3)}MB</div>
                                         <div className={styles.options}>
@@ -135,7 +135,7 @@ const HomePageLayout = () => {
                                 </div>
                                 <div className={styles['storage-meter']}>
                                     <p className={styles.stor} style={{fontWeight: 'normal'}}>
-                                        {data?.storageInGB?.toFixed(2)} GB Used
+                                        {data?.storageInGB.toFixed(3)} GB Used
                                     </p>
                                 </div>
                             </div>

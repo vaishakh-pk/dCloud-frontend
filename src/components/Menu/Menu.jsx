@@ -60,6 +60,8 @@ export default function AccountMenu({
                 if (data.success) {
                     toast.success(data.message)
                     setFavorite(!favorite)
+                    if(window.location.pathname === "/favourites")
+                        window.location.reload()
                 }
             })
             .catch((err) => {

@@ -24,7 +24,7 @@
     position: relative;
     border-radius: 12px;
     width: 100%;
-    height: 85%;
+    height: 100%;
     align-content: center;
     align-items: center;
     background-color: white;
@@ -35,18 +35,14 @@
 }
 
 .closeBtnContainer {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
-.closeBtn {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-}
+
+
+
+
 
 .preview img {
     border-radius: 12px;
